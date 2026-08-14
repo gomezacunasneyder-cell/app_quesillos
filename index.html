@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quesillos Emmanuel - Tu antojo tiene nombre: quesillo</title>
+    <meta name="description" content="En Quesillos Emmanuel nos apasiona crear deliciosos quesillos con un sabor casero, suave y cremoso. Haz tu pedido y endulza tus momentos.">
+    
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quesillosemmanuel.com/">
+    <meta property="og:title" content="Quesillos Emmanuel - Tu antojo tiene nombre: quesillo">
+    <meta property="og:description" content="Endulza tus momentos con quesillos preparados con calidad, dedicación y mucho sabor.">
+    <meta property="og:image" content="img/hero-1.jpg">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo">Quesillos Emmanuel</a>
+            <button class="hamburger" aria-label="Abrir menú" id="hamburger-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                    <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+                    <li><a href="#producto" class="nav-link">Producto</a></li>
+                    <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- SECCIÓN 1: HERO -->
+        <section id="inicio" class="hero">
+            <div class="hero-carousel" id="hero-carousel">
+                <div class="carousel-slide active">
+                    <img src="img/hero-1.jpg" alt="Delicioso quesillo casero entero" loading="lazy">
+                </div>
+                <div class="carousel-slide">
+                    <img src="img/hero-2.jpg" alt="Porción de quesillo cremoso" loading="lazy">
+                </div>
+            </div>
+            
+            <div class="hero-content">
+                <h1 class="hero-title">Tu antojo tiene nombre: quesillo.</h1>
+                <a href="#producto" class="btn btn-primary" id="btn-hacer-pedido">Hacer pedido</a>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: NOSOTROS -->
+        <section id="nosotros" class="nosotros container">
+            <div class="nosotros-image">
+                <img src="img/nosotros-fundadora.jpg" alt="Fundadora de Quesillos Emmanuel" loading="lazy" style="width: 100%; object-fit: cover;">
+                <img src="img/nosotros-cocina.jpg" alt="Equipo de Quesillos Emmanuel preparando postres" loading="lazy" style="width: 100%; object-fit: cover;">
+            </div>
+            <div class="nosotros-content">
+                <h2>Nosotros</h2>
+                <p>En Quesillos Emmanuel nos apasiona crear deliciosos quesillos con un sabor casero, suave y cremoso. Cada uno de nuestros productos es preparado con dedicación y cuidado, utilizando ingredientes de calidad para ofrecer un postre delicioso en cada cucharada.</p>
+                <p>Buscamos conservar el sabor tradicional del quesillo y, al mismo tiempo, darle nuestro toque especial para convertir cada ocasión en un momento dulce e inolvidable.</p>
+                
+                <div class="nosotros-card">
+                    <h3>❤️ Nuestra misión</h3>
+                    <p>Endulzar tus momentos con quesillos preparados con calidad, dedicación y mucho sabor.</p>
+                </div>
+                
+                <div class="nosotros-card">
+                    <h3>✨ Nuestra visión</h3>
+                    <p>Ser una marca reconocida por ofrecer quesillos deliciosos, de calidad y preparados con el cariño que caracteriza a Quesillos Emmanuel.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3: PRODUCTO -->
+        <section id="producto" class="producto container">
+            <div class="producto-image">
+                <img src="img/hero-2.jpg" alt="Quesillo Quesillos Emmanuel listo para comer" loading="lazy">
+                <span class="badge">Muy saludable</span>
+            </div>
+            <div class="producto-details">
+                <h2>Quesillo Quesillos Emmanuel</h2>
+                <ul class="producto-specs">
+                    <li><strong>Peso:</strong> 1kg 200g</li>
+                    <li><strong>Porciones:</strong> Rinde 8 porciones</li>
+                    <li><strong>Precio:</strong> $28.000 COP</li>
+                </ul>
+                <button class="btn btn-primary" id="btn-add-cart">Añadir al carrito</button>
+            </div>
+        </section>
+        
+        <!-- Fase 2: Sección vacía para el formulario de pedido -->
+        <section id="seccion-pedido" class="seccion-pedido container hidden">
+            <!-- AQUÍ IRÁ EL FORMULARIO DE PEDIDO - FASE 2 -->
+            <!-- backend integration point -->
+            <div class="placeholder-formulario">
+                <p>Aquí irá el formulario de pedido (Fase 2)</p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: TESTIMONIOS -->
+        <section id="testimonios" class="testimonios">
+            <div class="container">
+                <h2>Testimonios</h2>
+                <div class="testimonios-grid">
+                    <div class="testimonio-card">
+                        <div class="stars" aria-label="5 estrellas">⭐⭐⭐⭐⭐</div>
+                        <p class="comentario">"El mejor quesillo que he probado, súper cremoso y con el dulce perfecto. ¡Totalmente recomendado!"</p>
+                        <p class="cliente">- Laura P.</p>
+                    </div>
+                    <div class="testimonio-card">
+                        <div class="stars" aria-label="5 estrellas">⭐⭐⭐⭐⭐</div>
+                        <p class="comentario">"Pedimos uno para el cumpleaños de mi mamá y a todos les encantó. Se nota la calidad de los ingredientes."</p>
+                        <p class="cliente">- Carlos M.</p>
+                    </div>
+                    <div class="testimonio-card">
+                        <div class="stars" aria-label="4 estrellas">⭐⭐⭐⭐</div>
+                        <p class="comentario">"Muy rico y excelente presentación. El pedido llegó a tiempo."</p>
+                        <p class="cliente">- Andrea R.</p>
+                    </div>
+                </div>
+                <!-- botón visual, sin funcionalidad todavía (Fase 4) -->
+                <div class="testimonios-action">
+                    <button class="btn btn-secondary" id="btn-calificar">Calificar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="contacto" class="footer">
+        <div class="container footer-content">
+            <div class="footer-brand">
+                <h2>Quesillos Emmanuel</h2>
+                <p>Tu antojo tiene nombre.</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contacto</h3>
+                <p>WhatsApp: <a href="https://wa.me/573227068624" target="_blank" rel="noopener noreferrer">+57 3227068624</a></p>
+            </div>
+            <div class="footer-social">
+                <h3>Síguenos</h3>
+                <div class="social-icons">
+                    <!-- TODO: Reemplazar con enlaces reales a redes sociales -->
+                    <a href="#" aria-label="Facebook">FB</a>
+                    <a href="#" aria-label="Instagram">IG</a>
+                    <a href="#" aria-label="TikTok">TK</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Quesillos Emmanuel. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>
