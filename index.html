@@ -100,12 +100,103 @@
             </div>
         </section>
         
-        <!-- Fase 2: Sección vacía para el formulario de pedido -->
+        <!-- Fase 2: Formulario de pedido -->
         <section id="seccion-pedido" class="seccion-pedido container hidden">
-            <!-- AQUÍ IRÁ EL FORMULARIO DE PEDIDO - FASE 2 -->
-            <!-- backend integration point -->
-            <div class="placeholder-formulario">
-                <p>Aquí irá el formulario de pedido (Fase 2)</p>
+            <div class="pedido-container">
+                <h2>Completa tu pedido</h2>
+                <form id="form-pedido" class="form-pedido">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo *</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Ej. María Pérez">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono">Teléfono (Celular 10 dígitos) *</label>
+                        <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{10}" placeholder="Ej. 3001234567" title="Debe contener exactamente 10 números">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad de quesillos *</label>
+                        <input type="number" id="cantidad" name="cantidad" required min="1" value="1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Tipo de entrega *</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="tipoEntrega" value="domicilio" checked>
+                                Domicilio
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="tipoEntrega" value="recoge">
+                                Recoger en tienda
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div id="campos-domicilio" class="campos-condicionales">
+                        <div class="form-group">
+                            <label>Ubicación para entrega *</label>
+                            <button type="button" id="btn-ubicacion" class="btn btn-secondary btn-small">
+                                📍 Capturar mi ubicación actual
+                            </button>
+                            <p id="ubicacion-status" class="ubicacion-status"></p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="direccionTexto">Referencia de dirección (Opcional)</label>
+                            <input type="text" id="direccionTexto" name="direccionTexto" placeholder="Apto, conjunto, esquina...">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Método de pago</label>
+                        <input type="text" value="Transferencia" disabled class="input-disabled">
+                    </div>
+                    
+                    <div class="resumen-pedido">
+                        <h3>Resumen</h3>
+                        <div class="resumen-fila">
+                            <span>Total:</span>
+                            <span id="resumen-total">$28.000 COP</span>
+                        </div>
+                        <div class="resumen-fila destacado">
+                            <span>Anticipo (50%):</span>
+                            <span id="resumen-anticipo">$14.000 COP</span>
+                        </div>
+                        <p class="disclaimer-anticipo">
+                            ⚠️ Se requiere un anticipo del 50% para confirmar el pedido. El anticipo no es reembolsable si el pedido se cancela.
+                        </p>
+                    </div>
+                    
+                    <button type="submit" id="btn-comprar" class="btn btn-primary btn-block">Comprar</button>
+                </form>
+            </div>
+            
+            <!-- Modal/Banner de Confirmación (Factura) -->
+            <div id="modal-factura" class="modal-overlay hidden">
+                <div class="factura-card">
+                    <div id="factura-loading" class="factura-header">
+                        <h2>Generando tu factura...</h2>
+                        <div class="spinner"></div>
+                    </div>
+                    <div id="factura-detalle" class="factura-detalle hidden">
+                        <div class="factura-header">
+                            <h2>¡Pedido Recibido!</h2>
+                        </div>
+                        <div class="factura-cuerpo">
+                            <p><strong>Factura N°:</strong> <span id="fac-numero"></span></p>
+                            <p><strong>Fecha:</strong> <span id="fac-fecha"></span></p>
+                            <p><strong>Cliente:</strong> <span id="fac-cliente"></span></p>
+                            <p><strong>Cantidad:</strong> <span id="fac-cantidad"></span></p>
+                            <p><strong>Entrega:</strong> <span id="fac-entrega"></span></p>
+                            <p><strong>Total:</strong> <span id="fac-total"></span></p>
+                            <p class="destacado"><strong>Anticipo a transferir:</strong> <span id="fac-anticipo"></span></p>
+                            <p><strong>Método de pago:</strong> Transferencia</p>
+                        </div>
+                        <button id="btn-cerrar-factura" class="btn btn-primary btn-block" style="margin-top: 1.5rem;">Cerrar (Fase 2)</button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -165,6 +256,6 @@
     </footer>
 
     <!-- JS -->
-    <script src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
 </body>
 </html>

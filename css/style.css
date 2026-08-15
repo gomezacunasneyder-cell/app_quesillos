@@ -611,3 +611,234 @@ p {
     width: 100%;
   }
 }
+
+/* Forms & Pedido */
+.pedido-container {
+  background-color: var(--color-bg-alt);
+  padding: 3rem 2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.pedido-container h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(91, 154, 160, 0.2);
+}
+
+.input-disabled {
+  background-color: #f5f5f5;
+  color: #777;
+  cursor: not-allowed;
+}
+
+.radio-group {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn-small {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.ubicacion-status {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+  font-style: italic;
+}
+
+.ubicacion-status.success {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.ubicacion-status.error {
+  color: #c62828;
+}
+
+.resumen-pedido {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border: 2px dashed var(--color-primary-light);
+}
+
+.resumen-pedido h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  text-align: left;
+}
+
+.resumen-pedido h3::after {
+  display: none;
+}
+
+.resumen-fila {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.resumen-fila.destacado {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  border-top: 1px solid #eee;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.disclaimer-anticipo {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #d84315;
+  background-color: #fbe9e7;
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-bottom: 0;
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 1rem;
+}
+
+.factura-card {
+  background-color: white;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 400px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.factura-header {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.factura-header h2 {
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.factura-header h2::after {
+  display: none;
+}
+
+.factura-detalle {
+  display: flex;
+  flex-direction: column;
+}
+
+.factura-cuerpo {
+  padding: 1.5rem;
+}
+
+.factura-cuerpo p {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  border-bottom: 1px dashed #eee;
+  padding-bottom: 0.5rem;
+}
+
+.factura-cuerpo p:last-child {
+  border-bottom: none;
+}
+
+.factura-cuerpo .destacado {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  border-top: 2px solid var(--color-primary-light);
+  padding-top: 1rem;
+}
+
+/* Spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+  margin: 1rem auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
