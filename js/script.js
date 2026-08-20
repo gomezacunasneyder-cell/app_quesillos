@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
+    const navCloseBtn = document.getElementById('nav-close');
 
     const toggleMenu = () => {
         hamburgerBtn.classList.toggle('active');
@@ -21,6 +22,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (hamburgerBtn) {
         hamburgerBtn.addEventListener('click', toggleMenu);
+    }
+
+    if (navCloseBtn) {
+        navCloseBtn.addEventListener('click', toggleMenu);
     }
 
     // Cerrar menú al hacer clic en un enlace
@@ -283,8 +288,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 facturaLoading.classList.add('hidden');
                 facturaDetalle.classList.remove('hidden');
 
-                // En Fase 3 aquí irá la redirección a WhatsApp
+                // Fase 3: Redirección a WhatsApp
+                const fTotal = formatter.format(total);
+                const fAnticipo = formatter.format(anticipo);
+                const entregaTexto = tipoEntrega === 'domicilio' ? 'Domicilio' : 'Recoger en tienda';
+                const dirTexto = (tipoEntrega === 'domicilio' && direccionTexto) ? `\nDirección/Referencia: ${direccionTexto}` : '';
                 
+                const mensajeWhatsApp = `¡Hola! Acabo de realizar un pedido.\n\nDetalles:\nNombre: ${nombre}\nCantidad: ${cantidad} quesillos\nTotal: ${fTotal}\nAnticipo: ${fAnticipo}\nTipo de entrega: ${entregaTexto}${dirTexto}\nNúmero de factura: ${numeroFactura}\n\nPor favor, adjunto mi comprobante de transferencia para confirmar el anticipo.`;
+                
+                const urlWhatsApp = `https://wa.me/573227068624?text=${encodeURIComponent(mensajeWhatsApp)}`;
+                window.open(urlWhatsApp, '_blank');
             } catch (error) {
                 console.error("Error guardando el pedido:", error);
                 alert('Hubo un error al procesar tu pedido. Por favor verifica tu conexión a internet e intenta de nuevo.');

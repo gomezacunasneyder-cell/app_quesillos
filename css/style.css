@@ -182,6 +182,10 @@ p {
 }
 
 /* Navigation Menu */
+.nav-close {
+  display: none;
+}
+
 .nav-list {
   display: flex;
   gap: 2rem;
@@ -384,6 +388,44 @@ p {
   color: var(--color-primary);
 }
 
+/* Ubicación Section */
+.ubicacion {
+  padding: 6rem 1.5rem;
+}
+
+.ubicacion-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.ubicacion-info p {
+  margin-bottom: 0.5rem;
+}
+
+.ubicacion-info p strong {
+  color: var(--color-primary);
+}
+
+.btn-como-llegar {
+  margin-top: 2rem;
+  display: inline-block;
+}
+
+.ubicacion-mapa iframe {
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 768px) {
+  .ubicacion-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
 /* Hidden Section */
 .hidden {
   display: none !important;
@@ -551,28 +593,64 @@ p {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 80%;
+    width: 100vw;
     height: 100vh;
-    background-color: white;
+    background-color: var(--color-bg);
     flex-direction: column;
     justify-content: center;
     align-items: center;
     transition: var(--transition);
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    z-index: 2000;
   }
   
   .nav-menu.active {
     right: 0;
   }
+
+  .nav-close {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 3rem;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .nav-close:hover {
+    color: var(--color-primary);
+  }
   
   .nav-list {
     flex-direction: column;
     align-items: center;
-    gap: 2.5rem;
+    gap: 1.5rem;
+    width: 100%;
   }
   
   .nav-link {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    display: inline-block;
+    min-width: 250px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .nav-link:hover {
+    background-color: #4A8086;
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .nav-link::after {
+    display: none;
   }
   
   /* Hamburger Animation */

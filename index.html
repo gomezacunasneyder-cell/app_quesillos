@@ -31,10 +31,12 @@
                 <span></span>
             </button>
             <nav class="nav-menu" id="nav-menu">
+                <button class="nav-close" id="nav-close" aria-label="Cerrar menú">&times;</button>
                 <ul class="nav-list">
                     <li><a href="#inicio" class="nav-link">Inicio</a></li>
                     <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
                     <li><a href="#producto" class="nav-link">Producto</a></li>
+                    <li><a href="#ubicacion" class="nav-link">Dónde estamos</a></li>
                     <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
                     <li><a href="#contacto" class="nav-link">Contacto</a></li>
                 </ul>
@@ -194,8 +196,36 @@
                             <p class="destacado"><strong>Anticipo a transferir:</strong> <span id="fac-anticipo"></span></p>
                             <p><strong>Método de pago:</strong> Transferencia</p>
                         </div>
-                        <button id="btn-cerrar-factura" class="btn btn-primary btn-block" style="margin-top: 1.5rem;">Cerrar (Fase 2)</button>
+                        <button id="btn-cerrar-factura" class="btn btn-primary btn-block" style="margin-top: 1.5rem;">Cerrar</button>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: DÓNDE ESTAMOS -->
+        <section id="ubicacion" class="ubicacion container">
+            <h2>¿Dónde estamos?</h2>
+            <div class="ubicacion-content">
+                <div class="ubicacion-info">
+                    <p><strong>Dirección:</strong></p>
+                    <p>Cl. 27b #10-30, Los Patios, Norte de Santander</p>
+                    
+                    <p><strong>Horario de atención (para recoger pedidos):</strong></p>
+                    <p>Lunes a viernes: 8:00 a.m. – 6:00 p.m.<br>
+                    Sábado y domingo: 8:00 a.m. – 12:00 p.m.</p>
+                    
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=Cl.+27b+%2310-30,+Los+Patios,+Norte+de+Santander,+Colombia" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-como-llegar">Cómo llegar</a>
+                </div>
+                <div class="ubicacion-mapa">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15833.037593175825!2d-72.5057663!3d7.8016462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6645af5d0e28cf%3A0xc6a8274d7df67b4b!2sCl.%2027b%20%2310-30%2C%20Los%20Patios%2C%20Norte%20de%20Santander!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco" 
+                        width="100%" 
+                        height="350" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
         </section>
