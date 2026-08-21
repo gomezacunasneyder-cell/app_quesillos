@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburgerBtn = document.getElementById('hamburger-btn');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
-    const navCloseBtn = document.getElementById('nav-close');
 
     const toggleMenu = () => {
         hamburgerBtn.classList.toggle('active');
@@ -22,10 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (hamburgerBtn) {
         hamburgerBtn.addEventListener('click', toggleMenu);
-    }
-
-    if (navCloseBtn) {
-        navCloseBtn.addEventListener('click', toggleMenu);
     }
 
     // Cerrar menú al hacer clic en un enlace

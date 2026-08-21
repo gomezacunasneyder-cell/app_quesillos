@@ -169,7 +169,8 @@ p {
   background: transparent;
   border: none;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 2001;
+  position: relative;
 }
 
 .hamburger span {
@@ -597,8 +598,11 @@ p {
     height: 100vh;
     background-color: var(--color-bg);
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding-top: 8rem;
+    padding-bottom: 2rem;
+    overflow-y: auto;
     transition: var(--transition);
     z-index: 2000;
   }
@@ -607,22 +611,7 @@ p {
     right: 0;
   }
 
-  .nav-close {
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 3rem;
-    color: var(--color-text);
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-  }
 
-  .nav-close:hover {
-    color: var(--color-primary);
-  }
   
   .nav-list {
     flex-direction: column;
@@ -643,17 +632,11 @@ p {
     box-shadow: var(--shadow-sm);
   }
 
-  .nav-link:hover {
-    background-color: #4A8086;
-    color: white;
-    transform: translateY(-2px);
-  }
-
   .nav-link::after {
     display: none;
   }
   
-  /* Hamburger Animation */
+  /* Hamburger Animation: Transform to X */
   .hamburger.active span:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
   }
