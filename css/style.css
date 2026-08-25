@@ -903,3 +903,40 @@ p {
   transform: none !important;
   box-shadow: none !important;
 }
+
+/* Star Rating Selector */
+.star-selector {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 2.5rem;
+  color: #ddd;
+  cursor: pointer;
+  user-select: none;
+}
+
+.star-icon {
+  transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.star-icon:hover {
+  transform: scale(1.2);
+}
+
+.star-icon.active, 
+.star-icon.selected {
+  color: var(--color-accent); /* #A288E3 */
+}
+
+/* Testimonial empty state */
+.testimonio-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 1.1rem;
+}

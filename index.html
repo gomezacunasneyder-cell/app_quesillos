@@ -233,26 +233,53 @@
         <section id="testimonios" class="testimonios">
             <div class="container">
                 <h2>Testimonios</h2>
-                <div class="testimonios-grid">
-                    <div class="testimonio-card">
-                        <div class="stars" aria-label="5 estrellas">⭐⭐⭐⭐⭐</div>
-                        <p class="comentario">"El mejor quesillo que he probado, súper cremoso y con el dulce perfecto. ¡Totalmente recomendado!"</p>
-                        <p class="cliente">- Laura P.</p>
-                    </div>
-                    <div class="testimonio-card">
-                        <div class="stars" aria-label="5 estrellas">⭐⭐⭐⭐⭐</div>
-                        <p class="comentario">"Pedimos uno para el cumpleaños de mi mamá y a todos les encantó. Se nota la calidad de los ingredientes."</p>
-                        <p class="cliente">- Carlos M.</p>
-                    </div>
-                    <div class="testimonio-card">
-                        <div class="stars" aria-label="4 estrellas">⭐⭐⭐⭐</div>
-                        <p class="comentario">"Muy rico y excelente presentación. El pedido llegó a tiempo."</p>
-                        <p class="cliente">- Andrea R.</p>
-                    </div>
+                <div class="testimonios-grid" id="testimonios-grid">
+                    <!-- Los testimonios se cargarán aquí dinámicamente desde Firestore -->
+                    <p style="text-align: center; grid-column: 1 / -1; color: #666; font-style: italic;">Cargando testimonios...</p>
                 </div>
                 <!-- botón visual, sin funcionalidad todavía (Fase 4) -->
                 <div class="testimonios-action">
                     <button class="btn btn-secondary" id="btn-calificar">Calificar</button>
+                </div>
+            </div>
+            
+            <!-- Modal para Formulario de Calificación -->
+            <div id="modal-testimonio" class="modal-overlay hidden">
+                <div class="factura-card">
+                    <div class="factura-header">
+                        <h2>Déjanos tu opinión</h2>
+                    </div>
+                    <div class="factura-cuerpo">
+                        <form id="form-testimonio" class="form-pedido">
+                            <div class="form-group" style="text-align: center; margin-bottom: 2rem;">
+                                <label>¿Cuántas estrellas nos das? *</label>
+                                <div class="star-selector" id="star-selector">
+                                    <span class="star-icon" data-value="1">★</span>
+                                    <span class="star-icon" data-value="2">★</span>
+                                    <span class="star-icon" data-value="3">★</span>
+                                    <span class="star-icon" data-value="4">★</span>
+                                    <span class="star-icon" data-value="5">★</span>
+                                </div>
+                                <p id="star-error" class="ubicacion-status error hidden">Por favor selecciona al menos 1 estrella</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="testimonio-nombre">Nombre (Opcional)</label>
+                                <input type="text" id="testimonio-nombre" placeholder="Ej. Juan Pérez">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="testimonio-comentario">Comentario (Opcional)</label>
+                                <textarea id="testimonio-comentario" rows="3" maxlength="300" placeholder="¿Qué te pareció nuestro quesillo?" style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ccc; border-radius: 8px; font-family: inherit; font-size: 1rem; resize: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);"></textarea>
+                                <div style="text-align: right; font-size: 0.8rem; color: #777; margin-top: 0.2rem;">
+                                    <span id="char-count">300</span> caracteres restantes
+                                </div>
+                            </div>
+                            
+                            <button type="submit" id="btn-enviar-testimonio" class="btn btn-primary btn-block">Enviar calificación</button>
+                            <button type="button" id="btn-cerrar-testimonio" class="btn btn-secondary btn-block" style="margin-top: 1rem; background-color: #e0e0e0; color: #333;">Cancelar</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>

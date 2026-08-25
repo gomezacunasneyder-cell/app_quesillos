@@ -1,5 +1,5 @@
 import { db } from './firebase-config.js';
-import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { collection, addDoc, serverTimestamp, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Menú hamburguesa (Mobile Nav)
@@ -310,4 +310,183 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('seccion-pedido').classList.add('hidden');
         });
     }
+
+    // 6. FASE 4: Testimonios
+    const testimoniosGrid = document.getElementById('testimonios-grid');
+    const btnCalificar = document.getElementById('btn-calificar');
+    const modalTestimonio = document.getElementById('modal-testimonio');
+    const formTestimonio = document.getElementById('form-testimonio');
+    const btnCerrarTestimonio = document.getElementById('btn-cerrar-testimonio');
+    const starSelector = document.getElementById('star-selector');
+    const starsIcons = starSelector ? starSelector.querySelectorAll('.star-icon') : [];
+    const starError = document.getElementById('star-error');
+    const btnEnviarTestimonio = document.getElementById('btn-enviar-testimonio');
+    const inputNombre = document.getElementById('testimonio-nombre');
+    const inputComentario = document.getElementById('testimonio-comentario');
+    const charCount = document.getElementById('char-count');
+    
+    let currentRating = 0;
+
+    // A. Cargar testimonios
+    const cargarTestimonios = async () => {
+        if (!testimoniosGrid) return;
+        
+        try {
+            const testimoniosRef = collection(db, 'testimonios');
+            const q = query(testimoniosRef, orderBy('fecha', 'desc'), limit(6));
+            const querySnapshot = await getDocs(q);
+            
+            testimoniosGrid.innerHTML = '';
+            
+            if (querySnapshot.empty) {
+                testimoniosGrid.innerHTML = '<div class="testimonio-empty">Sé el primero en dejar tu opinión</div>';
+                return;
+            }
+            
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                const nombre = data.nombreCliente || 'Cliente anónimo';
+                const rating = data.estrellas || 5;
+                const comentario = data.comentario || '';
+                
+                let starsHTML = '';
+                for(let i = 1; i <= 5; i++) {
+                    starsHTML += i <= rating ? '⭐' : '☆';
+                }
+                
+                const card = document.createElement('div');
+                card.className = 'testimonio-card';
+                card.innerHTML = `
+                    <div class="stars" aria-label="${rating} estrellas">${starsHTML}</div>
+                    ${comentario ? `<p class="comentario">"${comentario}"</p>` : ''}
+                    <p class="cliente">- ${nombre}</p>
+                `;
+                testimoniosGrid.appendChild(card);
+            });
+            
+        } catch (error) {
+            console.error('Error al cargar testimonios:', error);
+            testimoniosGrid.innerHTML = '<p style="text-align: center; color: #d84315;">No se pudieron cargar los testimonios.</p>';
+        }
+    };
+
+    // Llamar a la carga inicial
+    cargarTestimonios();
+
+    // B. Modal Interacción
+    if (btnCalificar && modalTestimonio) {
+        btnCalificar.addEventListener('click', () => {
+            modalTestimonio.classList.remove('hidden');
+        });
+        
+        btnCerrarTestimonio.addEventListener('click', () => {
+            modalTestimonio.classList.add('hidden');
+            // reset form
+            formTestimonio.reset();
+            currentRating = 0;
+            updateStarsUI(0);
+            charCount.textContent = '300';
+            starError.classList.add('hidden');
+        });
+        
+        // Cerrar haciendo clic afuera
+        modalTestimonio.addEventListener('click', (e) => {
+            if (e.target === modalTestimonio) {
+                btnCerrarTestimonio.click();
+            }
+        });
+    }
+
+    // C. Contador de caracteres
+    if (inputComentario) {
+        inputComentario.addEventListener('input', () => {
+            const restantes = 300 - inputComentario.value.length;
+            charCount.textContent = restantes;
+        });
+    }
+
+    // D. Estrellas interacción
+    const updateStarsUI = (rating) => {
+        starsIcons.forEach(star => {
+            const val = parseInt(star.getAttribute('data-value'));
+            if (val <= rating) {
+                star.classList.add('selected');
+                star.textContent = '★';
+            } else {
+                star.classList.remove('selected');
+                star.textContent = '☆';
+            }
+        });
+    };
+
+    if (starsIcons.length > 0) {
+        starsIcons.forEach(star => {
+            star.addEventListener('mouseover', (e) => {
+                const hoverVal = parseInt(e.target.getAttribute('data-value'));
+                starsIcons.forEach(s => {
+                    const val = parseInt(s.getAttribute('data-value'));
+                    if (val <= hoverVal) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+            
+            star.addEventListener('mouseout', () => {
+                starsIcons.forEach(s => s.classList.remove('active'));
+            });
+            
+            star.addEventListener('click', (e) => {
+                currentRating = parseInt(e.target.getAttribute('data-value'));
+                updateStarsUI(currentRating);
+                starError.classList.add('hidden');
+            });
+        });
+    }
+
+    // E. Enviar formulario Testimonio
+    if (formTestimonio) {
+        formTestimonio.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (currentRating === 0) {
+                starError.classList.remove('hidden');
+                return;
+            }
+            
+            const nombreVal = inputNombre.value.trim() || 'Cliente anónimo';
+            const comentarioVal = inputComentario.value.trim();
+            
+            btnEnviarTestimonio.disabled = true;
+            btnEnviarTestimonio.textContent = 'Enviando...';
+            
+            try {
+                await addDoc(collection(db, 'testimonios'), {
+                    nombreCliente: nombreVal,
+                    estrellas: currentRating,
+                    comentario: comentarioVal,
+                    fecha: serverTimestamp()
+                });
+                
+                btnEnviarTestimonio.textContent = '¡Gracias por tu opinión!';
+                
+                // Refresh list
+                cargarTestimonios();
+                
+                setTimeout(() => {
+                    btnCerrarTestimonio.click();
+                    btnEnviarTestimonio.disabled = false;
+                    btnEnviarTestimonio.textContent = 'Enviar calificación';
+                }, 2000);
+                
+            } catch (error) {
+                console.error("Error al guardar testimonio:", error);
+                alert("Ocurrió un error al enviar tu calificación. Por favor intenta de nuevo.");
+                btnEnviarTestimonio.disabled = false;
+                btnEnviarTestimonio.textContent = 'Enviar calificación';
+            }
+        });
+    }
+
 });
