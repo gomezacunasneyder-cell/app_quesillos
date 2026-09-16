@@ -258,6 +258,12 @@ p {
   filter: brightness(0.7); /* make text readable */
 }
 
+/* Posicionamiento base de las imágenes del carrusel */
+.hero-img-1 { object-position: center; }
+.hero-img-2 { object-position: center 70%; }
+.hero-img-3 { object-position: center 20%; }
+.hero-img-4 { object-position: center 40%; }
+
 .hero-content {
   text-align: center;
   color: white; /* Important for contrast over images */
@@ -586,6 +592,14 @@ p {
 }
 
 @media (max-width: 768px) {
+  .hero {
+    min-height: 80vh; /* Reduce el espacio excesivo en móvil */
+  }
+  
+  .hero-img-3 {
+    object-position: center top; /* Encuadre específico de la fundadora en móvil */
+  }
+
   .hamburger {
     display: flex;
   }
