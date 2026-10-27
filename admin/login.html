@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5B9AA0">
+  <title>Acceso vendedor | Quesillos Emmanuel</title>
+  <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class="login-page">
+  <main class="login-shell">
+    <a class="brand-mark" href="../index.html" aria-label="Quesillos Emmanuel">
+      <span class="brand-mark__icon" aria-hidden="true">Q</span>
+      <span>Quesillos <strong>Emmanuel</strong></span>
+    </a>
+
+    <section class="login-panel" aria-labelledby="login-title">
+      <p class="eyebrow">Panel del vendedor</p>
+      <h1 id="login-title">Iniciar sesión</h1>
+      <p class="login-intro">Ingresa tus credenciales para continuar.</p>
+
+      <form id="login-form" class="login-form">
+        <label for="email">Correo electrónico</label>
+        <input id="email" name="email" type="email" autocomplete="username" required>
+
+        <label for="password">Contraseña</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+
+        <p id="login-error" class="message message--error" role="alert" hidden></p>
+        <button class="button button--primary login-submit" type="submit">Iniciar sesión</button>
+      </form>
+    </section>
+    <p class="login-footnote">Acceso privado para Quesillos Emmanuel</p>
+  </main>
+  <script type="module" src="/src/admin/auth.ts"></script>
+</body>
+</html>

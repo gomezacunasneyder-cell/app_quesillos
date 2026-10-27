@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5B9AA0">
+  <title>Pedidos pendientes | Quesillos Emmanuel</title>
+  <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class="dashboard-page">
+  <div id="admin-panel" class="dashboard" hidden>
+    <header class="topbar">
+      <a class="brand-mark" href="./panel.html" aria-label="Panel Quesillos Emmanuel">
+        <span class="brand-mark__icon" aria-hidden="true">Q</span>
+        <span>Quesillos <strong>Emmanuel</strong></span>
+      </a>
+      <button id="logout-button" class="button button--quiet" type="button">Cerrar sesión</button>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">Administración</p>
+          <h1>Pedidos pendientes</h1>
+        </div>
+        <div class="pending-count" aria-live="polite">
+          <span id="pending-count">0</span>
+          <span>pendientes</span>
+        </div>
+      </div>
+
+      <div id="new-order-notice" class="notice" role="status" aria-live="polite" hidden>
+        <span class="notice__text">🔔 Nuevo pedido recibido</span>
+        <button id="dismiss-notice" class="notice__close" type="button" aria-label="Cerrar notificación">×</button>
+      </div>
+
+      <p id="orders-error" class="message message--error" role="alert" hidden></p>
+      <p id="orders-loading" class="empty-state">Cargando pedidos…</p>
+      <section id="orders-list" class="orders-list" aria-label="Lista de pedidos pendientes"></section>
+      <p id="orders-empty" class="empty-state" hidden>No hay pedidos pendientes.</p>
+    </main>
+  </div>
+  <script type="module" src="/src/admin/auth.ts"></script>
+  <script type="module" src="/src/admin/panel.ts"></script>
+</body>
+</html>
