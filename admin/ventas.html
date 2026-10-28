@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5B9AA0">
+  <title>Ventas | Quesillos Emmanuel</title>
+  <link rel="stylesheet" href="./css/admin.css">
+</head>
+<body class="dashboard-page">
+  <div id="admin-panel" class="dashboard" hidden>
+    <header class="topbar">
+      <a class="brand-mark" href="./panel.html" aria-label="Panel Quesillos Emmanuel">
+        <span class="brand-mark__icon" aria-hidden="true">Q</span>
+        <span>Quesillos <strong>Emmanuel</strong></span>
+      </a>
+      <nav class="topbar__nav" aria-label="Secciones del panel">
+        <a class="topbar__link" href="./panel.html">Pedidos</a>
+        <a class="topbar__link is-active" href="./ventas.html" aria-current="page">Ventas</a>
+        <button id="logout-button" class="button button--quiet" type="button">Cerrar sesión</button>
+      </nav>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">Administración</p>
+          <h1>Ventas</h1>
+        </div>
+      </div>
+
+      <p id="ventas-error" class="message message--error" role="alert" hidden></p>
+      <p id="ventas-loading" class="empty-state">Cargando ventas…</p>
+
+      <div id="ventas-contenido" hidden>
+        <p class="sales-note">Se cuentan los pedidos marcados como <strong>entregados</strong>, por la fecha de entrega (hora de Bogotá).</p>
+
+        <section class="sales-card" aria-labelledby="semana-titulo">
+          <div class="sales-card__head">
+            <h2 id="semana-titulo">Semana</h2>
+            <div class="period-nav">
+              <button id="semana-anterior" class="button button--quiet" type="button" aria-label="Semana anterior">←</button>
+              <span id="semana-etiqueta" class="period-nav__label" aria-live="polite"></span>
+              <button id="semana-siguiente" class="button button--quiet" type="button" aria-label="Semana siguiente">→</button>
+              <button id="semana-actual" class="button button--quiet" type="button">Hoy</button>
+            </div>
+          </div>
+          <p class="sales-total" id="semana-total">$0</p>
+          <p class="sales-detail" id="semana-detalle"></p>
+          <ol id="semana-barras" class="bars" aria-label="Ventas por día de la semana"></ol>
+        </section>
+
+        <section class="sales-card" aria-labelledby="mes-titulo">
+          <div class="sales-card__head">
+            <h2 id="mes-titulo">Mes</h2>
+            <div class="period-nav">
+              <button id="mes-anterior" class="button button--quiet" type="button" aria-label="Mes anterior">←</button>
+              <span id="mes-etiqueta" class="period-nav__label" aria-live="polite"></span>
+              <button id="mes-siguiente" class="button button--quiet" type="button" aria-label="Mes siguiente">→</button>
+              <button id="mes-actual" class="button button--quiet" type="button">Hoy</button>
+            </div>
+          </div>
+          <p class="sales-total" id="mes-total">$0</p>
+          <p class="sales-detail" id="mes-detalle"></p>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="/src/admin/auth.ts"></script>
+  <script type="module" src="/src/admin/ventas.ts"></script>
+</body>
+</html>

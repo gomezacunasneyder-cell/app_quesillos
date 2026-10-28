@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import { resolve } from 'path';
 
 // Sitio multi-página: landing pública + panel administrativo.
@@ -15,6 +15,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         adminLogin: resolve(__dirname, 'admin/login.html'),
         adminPanel: resolve(__dirname, 'admin/panel.html'),
+        adminVentas: resolve(__dirname, 'admin/ventas.html'),
       },
     },
   },

@@ -1,5 +1,4 @@
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../config/firebase';
+import { requerirSesion } from './guard';
 import { getEl, queryEl } from '../utils/dom';
 import { currencyFormatter, formatTimestamp } from '../utils/format';
 import { urlComoLlegar } from '../utils/maps';
@@ -176,15 +175,7 @@ function manejarSnapshot(pedidos: PedidoConId[]): void {
   firstSnapshot = false;
 }
 
-onAuthStateChanged(auth, (user) => {
-  if (!user) {
-    panel.hidden = true;
-    window.location.replace('./login.html');
-    return;
-  }
-
-  panel.hidden = false;
-
+requerirSesion(panel, () => {
   orderRepository.escucharTodos(manejarSnapshot, () => {
     loadingMessage.hidden = true;
     errorMessage.textContent = 'No se pudieron cargar los pedidos. Verifica tu conexión y los permisos de Firebase.';
