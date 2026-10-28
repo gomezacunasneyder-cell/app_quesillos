@@ -1,16 +1,22 @@
-import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../config/firebase';
 import { getEl, queryEl } from '../utils/dom';
 import { scrollToElement } from './nav';
 import { currencyFormatter, formatFacturaDate } from '../utils/format';
-import type { Pedido, Ubicacion } from '../types/pedido';
+import { FirestoreOrderRepository } from '../services/FirestoreOrderRepository';
+import { TransferPaymentProvider } from '../payments/TransferPaymentProvider';
+import type { Ubicacion } from '../types/pedido';
 
 const PRECIO_QUESILLO = 28000;
 const WHATSAPP_NUMERO = '573227068624';
 
+// Único método de pago disponible hoy. El día que se sume una pasarela,
+// esto se vuelve una elección del usuario (o una fábrica), sin tocar el
+// resto del formulario ni el repositorio.
+const orderRepository = new FirestoreOrderRepository();
+const paymentProvider = new TransferPaymentProvider();
+
 function calcularTotales(cantidad: number): { total: number; anticipo: number } {
   const total = cantidad * PRECIO_QUESILLO;
-  const anticipo = total * 0.5;
+  const anticipo = paymentProvider.calcularAnticipo(total);
   return { total, anticipo };
 }
 
@@ -139,29 +145,22 @@ export function initOrderForm(): void {
     facturaLoading.classList.remove('hidden');
     facturaDetalle.classList.add('hidden');
 
-    const { total, anticipo } = actualizarResumen();
-    const numeroFactura = `FAC-${Date.now()}`;
+    const { total } = actualizarResumen();
 
     try {
-      const pedido: Pedido = {
-        nombreCliente: nombre,
-        telefono,
-        cantidad,
-        total,
-        anticipo,
-        tipoEntrega,
-        metodoPago: 'transferencia',
-        estado: 'pendiente',
-        fechaCreacion: serverTimestamp(),
-        numeroFactura,
-      };
-
-      if (tipoEntrega === 'domicilio') {
-        if (coordsGuardadas) pedido.ubicacion = coordsGuardadas;
-        if (direccionTexto) pedido.direccionTexto = direccionTexto;
-      }
-
-      await addDoc(collection(db, 'pedidos'), pedido);
+      const pedidoCreado = await orderRepository.crear(
+        {
+          nombreCliente: nombre,
+          telefono,
+          cantidad,
+          total,
+          tipoEntrega,
+          ubicacion: tipoEntrega === 'domicilio' && coordsGuardadas ? coordsGuardadas : undefined,
+          direccionTexto: tipoEntrega === 'domicilio' && direccionTexto ? direccionTexto : undefined,
+        },
+        paymentProvider,
+      );
+      const { numeroFactura, anticipo } = pedidoCreado;
 
       // Éxito: limpiar formulario y mostrar factura
       formPedido.reset();

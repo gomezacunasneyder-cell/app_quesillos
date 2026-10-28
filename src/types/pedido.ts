@@ -37,6 +37,8 @@ export interface Pedido {
   numeroFactura: string;
   /** Firestore Timestamp (serverTimestamp() al crear, Timestamp al leer). */
   fechaCreacion: unknown;
+  /** Se asigna (Fase 6) cuando el admin marca el pedido como 'entregado'. */
+  fechaEntrega?: unknown;
   ubicacion?: Ubicacion;
   direccionTexto?: string;
 }
@@ -46,14 +48,14 @@ export interface PedidoConId extends Pedido {
   id: string;
 }
 
-/** Datos necesarios para crear un pedido nuevo (sin estado/fecha/factura,
- * que los asigna la capa de dominio). */
+/** Datos necesarios para crear un pedido nuevo. El anticipo, el método de
+ * pago, el estado inicial y el número de factura los asigna la capa de
+ * dominio (OrderRepository + PaymentProvider), no quien llama. */
 export interface NuevoPedidoInput {
   nombreCliente: string;
   telefono: string;
   cantidad: number;
   total: number;
-  anticipo: number;
   tipoEntrega: TipoEntrega;
   ubicacion?: Ubicacion;
   direccionTexto?: string;

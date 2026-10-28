@@ -111,6 +111,44 @@ h1 { margin: 0; font-size: 30px; line-height: 1.2; }
 .notice__close { width: 30px; height: 30px; border: 0; border-radius: 4px; color: inherit; background: transparent; font-size: 24px; line-height: 1; }
 .notice__close:hover { background: rgba(162, 136, 227, 0.18); }
 
+/* Fase 6: estado del pedido, acciones del admin e historial */
+.status-badge {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+.status-badge--pendiente { color: #8A5A00; background: #FDEBCB; }
+.status-badge--en_preparacion { color: #46336F; background: var(--lavender); }
+.status-badge--en_camino { color: #1C5C63; background: var(--mint-soft); }
+.status-badge--listo_para_recoger { color: #1C5C63; background: var(--mint-soft); }
+.status-badge--entregado { color: #245D53; background: #DDF2E9; }
+
+.order-card__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.order-card__actions .button { min-height: 38px; padding: 8px 14px; font-size: 14px; }
+
+.order-card--history { border-left-color: var(--mint-soft); opacity: 0.92; }
+
+.history-section { display: grid; gap: 14px; margin-top: 34px; }
+.history-details {
+  padding: 6px 18px 18px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--white);
+}
+.history-details summary {
+  padding: 12px 0;
+  cursor: pointer;
+  font-weight: 800;
+  list-style: revert;
+}
+.history-details[open] summary { margin-bottom: 8px; }
+.orders-list--history { gap: 10px; }
+.orders-list--history .empty-state { margin: 0; }
+
 @keyframes new-order {
   0%, 45% { box-shadow: 0 0 0 4px rgba(162, 136, 227, 0.34); }
   100% { box-shadow: 0 3px 12px rgba(44, 58, 71, 0.04); }
