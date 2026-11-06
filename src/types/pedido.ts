@@ -9,16 +9,17 @@ export type TipoEntrega = 'domicilio' | 'recoge';
 export type MetodoPago = 'transferencia';
 
 /**
- * Estado del pedido. 'pendiente' es el único estado usado hasta la Fase 5.
- * Los demás se incorporan en la Fase 6 (flujo de estados en el panel admin).
- * Definirlos ya en el tipo no cambia ningún comportamiento actual.
+ * Estado del pedido. Flujo normal: pendiente → en_preparacion → (en_camino |
+ * listo_para_recoger) → entregado. 'cancelado' (Fase 9) es para pedidos que no
+ * completaron el anticipo: sale de la lista activa y no cuenta como venta.
  */
 export type EstadoPedido =
   | 'pendiente'
   | 'en_preparacion'
   | 'en_camino' // solo tipoEntrega === 'domicilio'
   | 'listo_para_recoger' // solo tipoEntrega === 'recoge'
-  | 'entregado';
+  | 'entregado'
+  | 'cancelado';
 
 export interface Ubicacion {
   lat: number;

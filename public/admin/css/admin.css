@@ -1,6 +1,7 @@
 :root {
   color-scheme: light;
   --mint: #5B9AA0;
+  --mint-strong: #367077; /* contraste AA para texto y botones con letra blanca */
   --mint-soft: #A8D8C8;
   --lavender: #EAE6F2;
   --accent: #A288E3;
@@ -53,7 +54,7 @@ button { cursor: pointer; }
   background: var(--white);
   box-shadow: var(--shadow);
 }
-.eyebrow { margin: 0 0 8px; color: var(--mint); font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.eyebrow { margin: 0 0 8px; color: var(--mint-strong); font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
 h1 { margin: 0; font-size: 30px; line-height: 1.2; }
 .login-intro { margin: 10px 0 28px; color: var(--muted); }
 .login-form { display: grid; gap: 10px; }
@@ -69,8 +70,8 @@ h1 { margin: 0; font-size: 30px; line-height: 1.2; }
 }
 .login-form input:focus { outline: 3px solid rgba(91, 154, 160, 0.2); border-color: var(--mint); }
 .button { min-height: 42px; padding: 9px 16px; border: 0; border-radius: 5px; font-weight: 800; }
-.button--primary { color: var(--white); background: var(--mint); }
-.button--primary:hover { background: #4A8086; }
+.button--primary { color: var(--white); background: var(--mint-strong); }
+.button--primary:hover { background: #2F6A70; }
 .login-submit { min-height: 48px; margin-top: 15px; }
 a.login-submit { display: flex; align-items: center; justify-content: center; text-decoration: none; }
 .button:disabled { cursor: wait; opacity: 0.7; }
@@ -127,11 +128,17 @@ a.login-submit { display: flex; align-items: center; justify-content: center; te
 .status-badge--en_camino { color: #1C5C63; background: var(--mint-soft); }
 .status-badge--listo_para_recoger { color: #1C5C63; background: var(--mint-soft); }
 .status-badge--entregado { color: #245D53; background: #DDF2E9; }
+.status-badge--cancelado { color: #7A1B16; background: #FCEBEA; }
 
 .order-card__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
 .order-card__actions .button { min-height: 38px; padding: 8px 14px; font-size: 14px; }
 
 .order-card--history { border-left-color: var(--mint-soft); opacity: 0.92; }
+
+.button--danger { border: 1px solid #E3B5B2; color: #8E1B16; background: var(--white); }
+.button--danger:hover, .button--danger.is-confirming { border-color: #B3261E; color: var(--white); background: #B3261E; }
+
+.order-card__warning { margin: 12px 0 0; padding: 10px 12px; border: 1px solid #F0C36D; border-radius: 6px; color: #6B4300; background: #FFF4DB; font-size: 14px; font-weight: 700; }
 
 .history-section { display: grid; gap: 14px; margin-top: 34px; }
 .history-details {
@@ -196,10 +203,10 @@ a.login-submit { display: flex; align-items: center; justify-content: center; te
   border: 0;
   border-radius: 5px;
   color: var(--white);
-  background: var(--mint);
+  background: var(--mint-strong);
   font-weight: 800;
 }
-.pwa-aviso__boton:hover { background: #4A8086; }
+.pwa-aviso__boton:hover { background: #2F6A70; }
 .pwa-aviso__cerrar { width: 30px; height: 30px; border: 0; border-radius: 4px; color: inherit; background: transparent; font-size: 22px; line-height: 1; }
 .pwa-aviso__cerrar:hover { background: rgba(44, 58, 71, 0.1); }
 

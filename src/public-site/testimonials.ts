@@ -1,47 +1,37 @@
 import { addDoc, collection, getDocs, limit, orderBy, query, serverTimestamp } from 'firebase/firestore';
 import { db } from '../config/firebase';
 import { queryEl } from '../utils/dom';
-import type { NuevoTestimonioInput, TestimonioConId } from '../types/testimonio';
+import { conTiempoLimite } from '../utils/async';
+import { abrirModal } from '../utils/modal';
+import type { NuevoTestimonioInput } from '../types/testimonio';
+import {
+  crearMensajeTestimonios,
+  crearTarjetaTestimonio,
+  MAX_COMENTARIO_TESTIMONIO,
+  MAX_NOMBRE_TESTIMONIO,
+  normalizarTestimonio,
+} from './testimonialCard';
 
-const MAX_COMENTARIO = 300;
 const MAX_TESTIMONIOS_MOSTRADOS = 6;
+const TIEMPO_MAX_GUARDADO_MS = 15000;
 
 async function cargarTestimonios(grid: HTMLElement): Promise<void> {
   try {
     const testimoniosRef = collection(db, 'testimonios');
     const q = query(testimoniosRef, orderBy('fecha', 'desc'), limit(MAX_TESTIMONIOS_MOSTRADOS));
-    const snapshot = await getDocs(q);
-
-    grid.innerHTML = '';
+    const snapshot = await conTiempoLimite(getDocs(q), TIEMPO_MAX_GUARDADO_MS);
 
     if (snapshot.empty) {
-      grid.innerHTML = '<div class="testimonio-empty">Sé el primero en dejar tu opinión</div>';
+      grid.replaceChildren(crearMensajeTestimonios('testimonio-empty', 'Sé el primero en dejar tu opinión'));
       return;
     }
 
-    snapshot.forEach((doc) => {
-      const data = doc.data() as TestimonioConId;
-      const nombre = data.nombreCliente || 'Cliente anónimo';
-      const rating = data.estrellas || 5;
-      const comentario = data.comentario || '';
-
-      let starsHTML = '';
-      for (let i = 1; i <= 5; i++) {
-        starsHTML += i <= rating ? '⭐' : '☆';
-      }
-
-      const card = document.createElement('div');
-      card.className = 'testimonio-card';
-      card.innerHTML = `
-        <div class="stars" aria-label="${rating} estrellas">${starsHTML}</div>
-        ${comentario ? `<p class="comentario">"${comentario}"</p>` : ''}
-        <p class="cliente">- ${nombre}</p>
-      `;
-      grid.appendChild(card);
-    });
+    // Los datos vienen de Firestore y cualquiera puede escribirlos: se
+    // normalizan y se pintan solo como texto (ver testimonialCard.ts).
+    grid.replaceChildren(...snapshot.docs.map((doc) => crearTarjetaTestimonio(normalizarTestimonio(doc.data()))));
   } catch (error) {
     console.error('Error al cargar testimonios:', error);
-    grid.innerHTML = '<p style="text-align: center; color: #d84315;">No se pudieron cargar los testimonios.</p>';
+    grid.replaceChildren(crearMensajeTestimonios('testimonio-error', 'No se pudieron cargar los testimonios.'));
   }
 }
 
@@ -61,12 +51,15 @@ export function initTestimonials(): void {
   const starSelector = queryEl<HTMLElement>('star-selector');
   const starsIcons = starSelector ? Array.from(starSelector.querySelectorAll<HTMLElement>('.star-icon')) : [];
   const starError = queryEl<HTMLElement>('star-error');
+  const errorEnvio = queryEl<HTMLElement>('testimonio-error');
   const btnEnviarTestimonio = queryEl<HTMLButtonElement>('btn-enviar-testimonio');
   const inputNombre = queryEl<HTMLInputElement>('testimonio-nombre');
   const inputComentario = queryEl<HTMLTextAreaElement>('testimonio-comentario');
   const charCount = queryEl<HTMLElement>('char-count');
 
   let currentRating = 0;
+  let cerrarModal: (() => void) | null = null;
+  let enviando = false;
 
   if (testimoniosGrid) {
     void cargarTestimonios(testimoniosGrid);
@@ -75,38 +68,45 @@ export function initTestimonials(): void {
   const updateStarsUI = (rating: number): void => {
     starsIcons.forEach((star) => {
       const val = Number(star.getAttribute('data-value'));
-      if (val <= rating) {
-        star.classList.add('selected');
-        star.textContent = '★';
-      } else {
-        star.classList.remove('selected');
-        star.textContent = '☆';
-      }
+      const seleccionada = val <= rating;
+      star.classList.toggle('selected', seleccionada);
+      star.textContent = seleccionada ? '★' : '☆';
+      star.setAttribute('aria-pressed', String(val === rating));
     });
+  };
+
+  const reiniciarFormulario = (): void => {
+    formTestimonio?.reset();
+    currentRating = 0;
+    updateStarsUI(0);
+    if (charCount) charCount.textContent = String(MAX_COMENTARIO_TESTIMONIO);
+    starError?.classList.add('hidden');
+    if (errorEnvio) errorEnvio.hidden = true;
   };
 
   if (btnCalificar && modalTestimonio && btnCerrarTestimonio && formTestimonio && charCount && starError) {
     btnCalificar.addEventListener('click', () => {
-      modalTestimonio.classList.remove('hidden');
+      cerrarModal = abrirModal(modalTestimonio, {
+        enfocar: starsIcons[0] ?? null,
+        puedeCerrar: () => !enviando,
+        alCerrar: reiniciarFormulario,
+      });
     });
 
     btnCerrarTestimonio.addEventListener('click', () => {
-      modalTestimonio.classList.add('hidden');
-      formTestimonio.reset();
-      currentRating = 0;
-      updateStarsUI(0);
-      charCount.textContent = String(MAX_COMENTARIO);
-      starError.classList.add('hidden');
+      if (!enviando) cerrarModal?.();
     });
 
     modalTestimonio.addEventListener('click', (e) => {
-      if (e.target === modalTestimonio) btnCerrarTestimonio.click();
+      if (e.target === modalTestimonio && !enviando) cerrarModal?.();
     });
   }
 
+  if (inputNombre) inputNombre.maxLength = MAX_NOMBRE_TESTIMONIO;
+
   if (inputComentario && charCount) {
     inputComentario.addEventListener('input', () => {
-      charCount.textContent = String(MAX_COMENTARIO - inputComentario.value.length);
+      charCount.textContent = String(MAX_COMENTARIO_TESTIMONIO - inputComentario.value.length);
     });
   }
 
@@ -135,36 +135,48 @@ export function initTestimonials(): void {
   if (formTestimonio && starError && btnEnviarTestimonio && testimoniosGrid) {
     formTestimonio.addEventListener('submit', async (e) => {
       e.preventDefault();
+      if (enviando) return;
+      if (errorEnvio) errorEnvio.hidden = true;
 
       if (currentRating === 0) {
         starError.classList.remove('hidden');
+        starsIcons[0]?.focus();
         return;
       }
 
-      const nombreVal = inputNombre?.value.trim() || 'Cliente anónimo';
-      const comentarioVal = inputComentario?.value.trim() || '';
+      const nombreVal = (inputNombre?.value ?? '').replace(/\s+/g, ' ').trim().slice(0, MAX_NOMBRE_TESTIMONIO) || 'Cliente anónimo';
+      const comentarioVal = (inputComentario?.value ?? '').trim().slice(0, MAX_COMENTARIO_TESTIMONIO);
 
+      enviando = true;
       btnEnviarTestimonio.disabled = true;
       btnEnviarTestimonio.textContent = 'Enviando...';
 
       try {
-        await guardarTestimonio({
-          nombreCliente: nombreVal,
-          estrellas: currentRating,
-          comentario: comentarioVal,
-        });
+        await conTiempoLimite(
+          guardarTestimonio({
+            nombreCliente: nombreVal,
+            estrellas: currentRating,
+            comentario: comentarioVal,
+          }),
+          TIEMPO_MAX_GUARDADO_MS,
+        );
 
         btnEnviarTestimonio.textContent = '¡Gracias por tu opinión!';
         void cargarTestimonios(testimoniosGrid);
 
         setTimeout(() => {
-          btnCerrarTestimonio?.click();
+          enviando = false;
+          cerrarModal?.();
           btnEnviarTestimonio.disabled = false;
           btnEnviarTestimonio.textContent = 'Enviar calificación';
         }, 2000);
       } catch (error) {
         console.error('Error al guardar testimonio:', error);
-        alert('Ocurrió un error al enviar tu calificación. Por favor intenta de nuevo.');
+        enviando = false;
+        if (errorEnvio) {
+          errorEnvio.textContent = 'No pudimos enviar tu calificación. Revisa tu conexión e inténtalo de nuevo.';
+          errorEnvio.hidden = false;
+        }
         btnEnviarTestimonio.disabled = false;
         btnEnviarTestimonio.textContent = 'Enviar calificación';
       }

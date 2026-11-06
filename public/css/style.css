@@ -5,6 +5,11 @@
   --color-bg-alt: #EAE6F2;
   --color-text: #2C3A47;
   --color-accent: #A288E3;
+  /* Variantes con contraste AA (>= 4.5:1) para texto y botones con letra blanca; los originales se usan en decoración */
+  --color-primary-strong: #367077;
+  --color-primary-strong-hover: #2F6A70;
+  --color-accent-strong: #7B5CC9;
+  --color-accent-strong-hover: #6A4AB8;
   --font-main: 'Nunito', sans-serif;
   
   --shadow-sm: 0 4px 6px rgba(44, 58, 71, 0.05);
@@ -106,12 +111,12 @@ p {
 }
 
 .btn-primary {
-  background-color: var(--color-primary);
+  background-color: var(--color-primary-strong);
   color: white;
 }
 
 .btn-primary:hover {
-  background-color: #4A8086;
+  background-color: var(--color-primary-strong-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -121,12 +126,12 @@ p {
 }
 
 .btn-secondary {
-  background-color: var(--color-accent);
+  background-color: var(--color-accent-strong);
   color: white;
 }
 
 .btn-secondary:hover {
-  background-color: #9277D3;
+  background-color: var(--color-accent-strong-hover);
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
@@ -156,7 +161,7 @@ p {
 .logo {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-primary-strong);
 }
 
 /* Hamburger Menu */
@@ -199,7 +204,7 @@ p {
 }
 
 .nav-link:hover {
-  color: var(--color-primary);
+  color: var(--color-primary-strong);
 }
 
 .nav-link::after {
@@ -331,7 +336,7 @@ p {
 
 .nosotros-card h3 {
   font-size: 1.25rem;
-  color: var(--color-primary);
+  color: var(--color-primary-strong);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -360,7 +365,7 @@ p {
   position: absolute;
   top: 20px;
   right: -10px;
-  background-color: var(--color-accent);
+  background-color: var(--color-accent-strong);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -392,7 +397,7 @@ p {
 .producto-specs li:last-child {
   border-bottom: none;
   font-size: 1.25rem;
-  color: var(--color-primary);
+  color: var(--color-primary-strong);
 }
 
 /* Ubicación Section */
@@ -413,7 +418,7 @@ p {
 }
 
 .ubicacion-info p strong {
-  color: var(--color-primary);
+  color: var(--color-primary-strong);
 }
 
 .btn-como-llegar {
@@ -448,7 +453,7 @@ p {
   border-radius: 12px;
   padding: 4rem;
   text-align: center;
-  color: var(--color-primary);
+  color: var(--color-primary-strong);
   font-weight: 700;
 }
 
@@ -492,7 +497,7 @@ p {
 
 .cliente {
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-primary-strong);
   margin-top: 1rem;
   margin-bottom: 0;
 }
@@ -803,7 +808,7 @@ p {
 
 .resumen-fila.destacado {
   font-weight: 700;
-  color: var(--color-primary);
+  color: var(--color-primary-strong);
   font-size: 1.2rem;
   border-top: 1px solid #eee;
   padding-top: 0.5rem;
@@ -813,7 +818,7 @@ p {
 .disclaimer-anticipo {
   margin-top: 1rem;
   font-size: 0.85rem;
-  color: #d84315;
+  color: #B3261E;
   background-color: #fbe9e7;
   padding: 0.8rem;
   border-radius: 8px;
@@ -888,7 +893,7 @@ p {
 }
 
 .factura-cuerpo .destacado {
-  color: var(--color-primary);
+  color: var(--color-primary-strong);
   font-size: 1.1rem;
   font-weight: 700;
   margin-top: 1rem;
@@ -950,7 +955,115 @@ p {
   background: white;
   border-radius: 12px;
   box-shadow: var(--shadow-sm);
-  color: var(--color-primary);
+  color: var(--color-primary-strong);
   font-weight: 600;
   font-size: 1.1rem;
+}
+
+/* ============================================================
+   Fase 9: accesibilidad, errores de formulario y estados nuevos
+   ============================================================ */
+
+/* Foco visible para quien navega con teclado (solo aparece con teclado) */
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* El contenedor principal recibe foco programático al usar anclas: sin recuadro */
+main:focus {
+  outline: none;
+}
+
+/* Enlace "Saltar al contenido": invisible hasta que recibe el foco */
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 3000;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  background: var(--color-text);
+  color: #fff;
+  font-weight: 700;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Errores de campo */
+.field-error {
+  margin: 0.4rem 0 0;
+  color: #B3261E;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.field-error[hidden],
+.form-error[hidden] {
+  display: none;
+}
+
+.form-group input[aria-invalid="true"] {
+  border-color: #B3261E;
+  box-shadow: 0 0 0 3px rgba(179, 38, 30, 0.15);
+}
+
+/* Error general al enviar el pedido (red caída, etc.) */
+.form-error {
+  margin-bottom: 1.2rem;
+  padding: 1rem;
+  border: 1px solid #B3261E;
+  border-radius: 8px;
+  background: #FCEBEA;
+  color: #7A1B16;
+}
+
+.form-error__texto {
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+.form-error__link {
+  font-weight: 700;
+  text-decoration: underline;
+  color: inherit;
+}
+
+/* Las estrellas ahora son botones reales (teclado y lectores de pantalla) */
+.star-icon {
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.testimonio-error {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #B3261E;
+}
+
+/* Menú móvil cerrado: sus enlaces no deben recibir foco de teclado */
+@media (max-width: 768px) {
+  .nav-menu:not(.active) {
+    visibility: hidden;
+  }
+}
+
+/* Respeta "reducir movimiento" del sistema */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

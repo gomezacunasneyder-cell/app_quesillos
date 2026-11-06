@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { auth } from '../config/firebase';
+import { auth } from '../config/firebaseAuth';
 import { queryEl } from '../utils/dom';
 
 const loginForm = queryEl<HTMLFormElement>('login-form');

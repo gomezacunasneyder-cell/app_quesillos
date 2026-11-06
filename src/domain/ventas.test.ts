@@ -35,7 +35,7 @@ const REFERENCIA = new Date('2026-10-27T15:00:00Z');
 
 describe('fechaDeVenta', () => {
   it('solo cuenta pedidos entregados', () => {
-    for (const estado of ['pendiente', 'en_preparacion', 'en_camino', 'listo_para_recoger'] as const) {
+    for (const estado of ['pendiente', 'en_preparacion', 'en_camino', 'listo_para_recoger', 'cancelado'] as const) {
       expect(fechaDeVenta(pedido({ estado }))).toBeNull();
     }
     expect(fechaDeVenta(pedido())).toBeInstanceOf(Date);

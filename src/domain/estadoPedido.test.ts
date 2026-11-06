@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { EstadoPedido, TipoEntrega } from '../types/pedido';
-import { esEntregado, etiquetaEstado, obtenerTransicion } from './estadoPedido';
+import { esCancelado, esEntregado, estaActivo, etiquetaEstado, obtenerTransicion, puedeCancelar } from './estadoPedido';
 
 function recorrer(tipoEntrega: TipoEntrega): EstadoPedido[] {
   const recorrido: EstadoPedido[] = ['pendiente'];
@@ -42,7 +42,30 @@ describe('flujo de estados del pedido', () => {
   });
 
   it('todos los estados tienen etiqueta legible', () => {
-    const estados: EstadoPedido[] = ['pendiente', 'en_preparacion', 'en_camino', 'listo_para_recoger', 'entregado'];
+    const estados: EstadoPedido[] = ['pendiente', 'en_preparacion', 'en_camino', 'listo_para_recoger', 'entregado', 'cancelado'];
     for (const estado of estados) expect(etiquetaEstado(estado)).toMatch(/\S/);
+  });
+});
+
+describe('cancelación de pedidos', () => {
+  it('solo se puede cancelar un pedido pendiente (antes de confirmar el anticipo)', () => {
+    expect(puedeCancelar('pendiente')).toBe(true);
+    for (const estado of ['en_preparacion', 'en_camino', 'listo_para_recoger', 'entregado', 'cancelado'] as const) {
+      expect(puedeCancelar(estado), estado).toBe(false);
+    }
+  });
+
+  it('cancelado es un estado final: no tiene siguiente paso', () => {
+    expect(obtenerTransicion({ estado: 'cancelado', tipoEntrega: 'domicilio' })).toBeNull();
+    expect(esCancelado('cancelado')).toBe(true);
+    expect(esCancelado('pendiente')).toBe(false);
+  });
+
+  it('un pedido cancelado o entregado deja de estar activo', () => {
+    expect(estaActivo('cancelado')).toBe(false);
+    expect(estaActivo('entregado')).toBe(false);
+    for (const estado of ['pendiente', 'en_preparacion', 'en_camino', 'listo_para_recoger'] as const) {
+      expect(estaActivo(estado), estado).toBe(true);
+    }
   });
 });

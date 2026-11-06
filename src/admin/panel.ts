@@ -2,7 +2,15 @@ import { requerirSesion } from './guard';
 import { getEl, queryEl } from '../utils/dom';
 import { currencyFormatter, formatTimestamp } from '../utils/format';
 import { urlComoLlegar } from '../utils/maps';
-import { etiquetaEstado, esEntregado, obtenerTransicion } from '../domain/estadoPedido';
+import {
+  esCancelado,
+  esEntregado,
+  estaActivo,
+  etiquetaEstado,
+  obtenerTransicion,
+  puedeCancelar,
+} from '../domain/estadoPedido';
+import { detectarInconsistencias } from '../domain/integridadPedido';
 import { FirestoreOrderRepository } from '../services/FirestoreOrderRepository';
 import type { EstadoPedido, PedidoConId } from '../types/pedido';
 
@@ -22,11 +30,22 @@ const historyDomicilioEmpty = getEl<HTMLElement>('history-domicilio-empty');
 const historyRecogeList = getEl<HTMLElement>('history-recoge-list');
 const historyRecogeCount = getEl<HTMLElement>('history-recoge-count');
 const historyRecogeEmpty = getEl<HTMLElement>('history-recoge-empty');
+const historyCanceladosList = getEl<HTMLElement>('history-cancelados-list');
+const historyCanceladosCount = getEl<HTMLElement>('history-cancelados-count');
+const historyCanceladosEmpty = getEl<HTMLElement>('history-cancelados-empty');
 
 const MAX_HISTORIAL = 30;
 
+/** Tiempo que el botón "Cancelar pedido" espera la segunda pulsación de confirmación. */
+const CONFIRMACION_CANCELAR_MS = 5000;
+
 let firstSnapshot = true;
 let actualizandoId: string | null = null;
+
+function mostrarError(mensaje: string): void {
+  errorMessage.textContent = mensaje;
+  errorMessage.hidden = false;
+}
 
 function addDetail(list: HTMLElement, label: string, value: string): void {
   const item = document.createElement('div');
@@ -63,6 +82,17 @@ function createOrderCard(order: PedidoConId, isNew: boolean): HTMLElement {
   badge.className = `status-badge status-badge--${order.estado}`;
   badge.textContent = etiquetaEstado(order.estado);
 
+  // Las reglas de Firestore no validan el contenido de los pedidos: aquí se
+  // vuelve a comprobar con el precio real y se avisa al vendedor.
+  const inconsistencias = detectarInconsistencias(order);
+  const advertencia = document.createElement('p');
+  advertencia.className = 'order-card__warning';
+  advertencia.hidden = inconsistencias.length === 0;
+  if (inconsistencias.length > 0) {
+    advertencia.setAttribute('role', 'note');
+    advertencia.textContent = `⚠️ Revisa este pedido antes de prepararlo: ${inconsistencias.join(' ')}`;
+  }
+
   const details = document.createElement('dl');
   details.className = 'order-details';
   addDetail(details, 'Teléfono', order.telefono || 'No registrado');
@@ -97,7 +127,18 @@ function createOrderCard(order: PedidoConId, isNew: boolean): HTMLElement {
     actions.append(btnAvanzar);
   }
 
-  card.append(header, badge, details, actions);
+  if (puedeCancelar(order.estado)) {
+    const btnCancelar = document.createElement('button');
+    btnCancelar.type = 'button';
+    btnCancelar.className = 'button button--danger';
+    btnCancelar.textContent = 'Cancelar pedido';
+    btnCancelar.dataset.action = 'cancelar-pedido';
+    btnCancelar.dataset.etiqueta = 'Cancelar pedido';
+    btnCancelar.disabled = actualizandoId === order.id;
+    actions.append(btnCancelar);
+  }
+
+  card.append(header, badge, advertencia, details, actions);
   return card;
 }
 
@@ -138,7 +179,8 @@ function renderHistorySection(
 }
 
 function renderOrders(snapshot: PedidoConId[], nuevosIds: Set<string>): void {
-  const activos = snapshot.filter((order) => !esEntregado(order.estado)).sort(porFechaDesc);
+  const activos = snapshot.filter((order) => estaActivo(order.estado)).sort(porFechaDesc);
+  const cancelados = snapshot.filter((order) => esCancelado(order.estado));
   const entregadosDomicilio = snapshot.filter(
     (order) => esEntregado(order.estado) && order.tipoEntrega === 'domicilio',
   );
@@ -154,6 +196,7 @@ function renderOrders(snapshot: PedidoConId[], nuevosIds: Set<string>): void {
 
   renderHistorySection(entregadosDomicilio, historyDomicilioList, historyDomicilioCount, historyDomicilioEmpty);
   renderHistorySection(entregadosRecoge, historyRecogeList, historyRecogeCount, historyRecogeEmpty);
+  renderHistorySection(cancelados, historyCanceladosList, historyCanceladosCount, historyCanceladosEmpty);
 
   if (nuevosIds.size > 0) notice.hidden = false;
 }
@@ -178,8 +221,7 @@ function manejarSnapshot(pedidos: PedidoConId[]): void {
 requerirSesion(panel, () => {
   orderRepository.escucharTodos(manejarSnapshot, () => {
     loadingMessage.hidden = true;
-    errorMessage.textContent = 'No se pudieron cargar los pedidos. Verifica tu conexión y los permisos de Firebase.';
-    errorMessage.hidden = false;
+    mostrarError('No se pudieron cargar los pedidos. Verifica tu conexión y los permisos de Firebase.');
   });
 });
 
@@ -187,28 +229,73 @@ queryEl<HTMLButtonElement>('dismiss-notice')?.addEventListener('click', () => {
   notice.hidden = true;
 });
 
-// Delegación de eventos: los botones "avanzar estado" se recrean en cada
-// snapshot, así que el listener vive en el contenedor, no en cada botón.
+/** Cambia el estado de un pedido; si falla, deja la tarjeta como estaba para poder reintentar. */
+async function cambiarEstado(card: HTMLElement, orderId: string, nuevoEstado: EstadoPedido, boton: HTMLButtonElement): Promise<void> {
+  const botones = Array.from(card.querySelectorAll<HTMLButtonElement>('button'));
+  const etiquetaOriginal = boton.dataset.etiqueta ?? boton.textContent ?? '';
+
+  actualizandoId = orderId;
+  botones.forEach((b) => {
+    b.disabled = true;
+  });
+  boton.textContent = 'Actualizando...';
+  errorMessage.hidden = true;
+
+  try {
+    await orderRepository.actualizarEstado(orderId, nuevoEstado);
+    // Éxito: el listener en tiempo real vuelve a pintar la tarjeta.
+  } catch (error) {
+    console.error('Error actualizando el estado del pedido:', error);
+    mostrarError('No se pudo actualizar el estado del pedido. Verifica tu conexión e intenta de nuevo.');
+    botones.forEach((b) => {
+      b.disabled = false;
+    });
+    boton.textContent = etiquetaOriginal;
+    boton.classList.remove('is-confirming');
+    delete boton.dataset.confirmar;
+  } finally {
+    actualizandoId = null;
+  }
+}
+
+/** Primera pulsación de "Cancelar pedido": pide confirmar (evita cancelar por un toque accidental). */
+function pedirConfirmacionCancelar(boton: HTMLButtonElement): void {
+  boton.dataset.confirmar = '1';
+  boton.classList.add('is-confirming');
+  boton.textContent = '¿Seguro? Pulsa para cancelar';
+
+  window.setTimeout(() => {
+    if (boton.isConnected && boton.dataset.confirmar === '1') {
+      delete boton.dataset.confirmar;
+      boton.classList.remove('is-confirming');
+      boton.textContent = boton.dataset.etiqueta ?? 'Cancelar pedido';
+    }
+  }, CONFIRMACION_CANCELAR_MS);
+}
+
+// Delegación de eventos: los botones se recrean en cada snapshot, así que el
+// listener vive en el contenedor, no en cada botón.
 ordersList.addEventListener('click', (e) => {
-  const boton = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-action="avanzar-estado"]');
+  const boton = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-action]');
   if (!boton) return;
 
   const card = boton.closest<HTMLElement>('[data-order-id]');
-  const siguienteEstado = boton.dataset.siguienteEstado;
   const orderId = card?.dataset.orderId;
-  if (!orderId || !siguienteEstado) return;
+  if (!card || !orderId) return;
 
-  actualizandoId = orderId;
-  boton.disabled = true;
-  boton.textContent = 'Actualizando...';
+  if (boton.dataset.action === 'cancelar-pedido') {
+    if (boton.dataset.confirmar !== '1') {
+      pedirConfirmacionCancelar(boton);
+      return;
+    }
+    void cambiarEstado(card, orderId, 'cancelado', boton);
+    return;
+  }
 
-  orderRepository
-    .actualizarEstado(orderId, siguienteEstado as EstadoPedido)
-    .catch((error) => {
-      console.error('Error actualizando el estado del pedido:', error);
-      alert('No se pudo actualizar el estado del pedido. Verifica tu conexión e intenta de nuevo.');
-    })
-    .finally(() => {
-      actualizandoId = null;
-    });
+  if (boton.dataset.action === 'avanzar-estado') {
+    const siguienteEstado = boton.dataset.siguienteEstado;
+    if (!siguienteEstado) return;
+    boton.dataset.etiqueta = boton.textContent ?? '';
+    void cambiarEstado(card, orderId, siguienteEstado as EstadoPedido, boton);
+  }
 });

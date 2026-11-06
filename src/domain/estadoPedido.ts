@@ -6,6 +6,8 @@ import type { EstadoPedido, Pedido } from '../types/pedido';
  *
  *   pendiente → en_preparacion → en_camino          (domicilio) → entregado
  *                               → listo_para_recoger (recoge)   → entregado
+ *
+ * Un pedido 'pendiente' (anticipo sin confirmar) también puede 'cancelado'.
  */
 
 export interface TransicionEstado {
@@ -19,6 +21,7 @@ const ETIQUETAS_ESTADO: Record<EstadoPedido, string> = {
   en_camino: 'En camino',
   listo_para_recoger: 'Listo para recoger',
   entregado: 'Entregado',
+  cancelado: 'Cancelado',
 };
 
 export function etiquetaEstado(estado: EstadoPedido): string {
@@ -38,10 +41,28 @@ export function obtenerTransicion(pedido: Pick<Pedido, 'estado' | 'tipoEntrega'>
     case 'listo_para_recoger':
       return { siguiente: 'entregado', etiquetaBoton: 'Marcar como entregado' };
     case 'entregado':
+    case 'cancelado':
       return null;
   }
 }
 
 export function esEntregado(estado: EstadoPedido): boolean {
   return estado === 'entregado';
+}
+
+export function esCancelado(estado: EstadoPedido): boolean {
+  return estado === 'cancelado';
+}
+
+/** Un pedido "activo" es el que todavía requiere atención del vendedor. */
+export function estaActivo(estado: EstadoPedido): boolean {
+  return !esEntregado(estado) && !esCancelado(estado);
+}
+
+/**
+ * Solo se cancela mientras sigue 'pendiente' (anticipo sin confirmar). Una vez
+ * que se empezó a preparar, el anticipo ya se recibió y no es reembolsable.
+ */
+export function puedeCancelar(estado: EstadoPedido): boolean {
+  return estado === 'pendiente';
 }

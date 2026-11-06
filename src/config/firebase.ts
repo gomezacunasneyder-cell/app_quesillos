@@ -1,5 +1,4 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 /**
@@ -17,7 +16,8 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
+// Auth vive en ./firebaseAuth.ts: así el sitio público (que solo usa Firestore)
+// no descarga el SDK de autenticación, que solo necesita el panel admin.
 export const db = getFirestore(app);

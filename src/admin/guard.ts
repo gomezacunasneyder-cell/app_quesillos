@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../config/firebase';
+import { auth } from '../config/firebaseAuth';
 
 /**
  * Protege una página del panel: sin sesión redirige al login; con sesión
