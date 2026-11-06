@@ -2,6 +2,7 @@ import { initNav } from './nav';
 import { initCarousel } from './carousel';
 import { initAddToCartButton, initOrderForm } from './orderForm';
 import { initTestimonials } from './testimonials';
+import { initReveal } from './reveal';
 
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
@@ -9,4 +10,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initAddToCartButton();
   initOrderForm();
   initTestimonials();
+  initReveal();
 });

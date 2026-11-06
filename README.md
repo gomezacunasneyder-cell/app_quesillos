@@ -32,17 +32,19 @@ Página web con dos partes:
 
 **Nombre de marca**: Quesillos Emmanuel
 
-**Paleta "Menta Fresca & Lavanda"**
+**Paleta "Crema & Terracota" (landing pública, rediseño de noviembre 2026)**
 
 | Rol | Color | Hex |
 |---|---|---|
-| Principal / Botones (CTA) | Verde menta | `#5B9AA0` / `#A8D8C8` |
-| Fondo principal | Blanco puro | `#FFFFFF` |
-| Fondo testimonios / detalles | Lavanda pastel | `#EAE6F2` |
-| Textos y footer | Azul pizarra oscuro | `#2C3A47` |
-| Acento en etiquetas | Púrpura pastel | `#A288E3` |
+| Fondo principal | Crema | `#F8F3EA` |
+| Acento decorativo (formas, líneas) | Terracota | `#D98C62` |
+| Acento decorativo (estrellas) / precio (oscuro) | Caramelo | `#B87543` / `#8A5226` |
+| Textos, botones y footer | Chocolate | `#493126` |
+| Detalles (tarjeta de visión) | Verde suave | `#74836B` (tinte `#E4E9DE`) |
 
-**Tipografía y tono**: sentence case, cálido, cercano, sabor tradicional/casero.
+Terracota y caramelo no alcanzan contraste 4.5:1 sobre crema: solo se usan como decoración; el texto va en chocolate o en las variantes oscuras. El panel admin conserva su propia paleta.
+
+**Tipografía y tono**: Playfair Display (títulos) + Nunito Sans (texto); sentence case, cálido, cercano, sabor tradicional/casero.
 
 ---
 

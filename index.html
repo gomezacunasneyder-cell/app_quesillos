@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quesillos Emmanuel - Tu antojo tiene nombre: quesillo</title>
-    <meta name="description" content="Quesillos caseros en Los Patios, Norte de Santander: suaves, cremosos y hechos sobre pedido. Pide el tuyo con domicilio o recógelo en tienda.">
-    <meta name="theme-color" content="#5B9AA0">
+    <meta name="description" content="Quesillo casero de textura suave y cremosa, preparado en Los Patios, Norte de Santander. Pídelo a domicilio o recógelo en tienda.">
+    <meta name="theme-color" content="#F8F3EA">
     <link rel="canonical" href="__SITE_URL__/">
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -16,14 +16,14 @@
     <meta property="og:locale" content="es_CO">
     <meta property="og:url" content="__SITE_URL__/">
     <meta property="og:title" content="Quesillos Emmanuel - Tu antojo tiene nombre: quesillo">
-    <meta property="og:description" content="Endulza tus momentos con quesillos caseros preparados con calidad, dedicación y mucho sabor. Pide el tuyo.">
+    <meta property="og:description" content="Quesillo casero, suave y cremoso, para endulzar tus momentos especiales. Pídelo a domicilio o recógelo en tienda.">
     <meta property="og:image" content="__SITE_URL__/img/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Quesillo casero de Quesillos Emmanuel">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Quesillos Emmanuel - Tu antojo tiene nombre: quesillo">
-    <meta name="twitter:description" content="Quesillos caseros en Los Patios, Norte de Santander. Pide el tuyo con domicilio o recógelo en tienda.">
+    <meta name="twitter:description" content="Quesillo casero en Los Patios, Norte de Santander. Pídelo a domicilio o recógelo en tienda.">
     <meta name="twitter:image" content="__SITE_URL__/img/og-image.jpg">
 
     <!-- Datos estructurados para buscadores -->
@@ -32,7 +32,7 @@
       "@context": "https://schema.org",
       "@type": "FoodEstablishment",
       "name": "Quesillos Emmanuel",
-      "description": "Quesillos caseros, suaves y cremosos, hechos sobre pedido.",
+      "description": "Quesillo casero, suave y cremoso, en Los Patios, Norte de Santander.",
       "url": "__SITE_URL__/",
       "image": "__SITE_URL__/img/og-image.jpg",
       "telephone": "+573227068624",
@@ -49,20 +49,20 @@
       ]
     }
     </script>
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Google Fonts -->
+
+    <!-- Tipografías: Playfair Display (títulos) y Nunito Sans (texto) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <a class="skip-link" href="#contenido-principal">Saltar al contenido</a>
     <header class="header">
         <div class="header-container">
-            <a href="#" class="logo">Quesillos Emmanuel</a>
+            <a href="#inicio" class="logo">Quesillos Emmanuel</a>
             <button class="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu" id="hamburger-btn">
                 <span></span>
                 <span></span>
@@ -82,72 +82,86 @@
     </header>
 
     <main id="contenido-principal" tabindex="-1">
-        <!-- SECCIÓN 1: HERO -->
+        <!-- SECCIÓN 1: INICIO -->
         <section id="inicio" class="hero">
-            <div class="hero-carousel" id="hero-carousel">
-                <div class="carousel-slide active">
-                    <img src="img/hero-1.jpg" alt="Quesillo casero con caramelo sobre una tabla de madera" class="hero-img-1" width="896" height="1195" fetchpriority="high">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <h1 class="hero-title">Hay antojos que merecen disfrutarse.</h1>
+                    <p class="hero-lead">Déjate conquistar por el sabor casero de nuestro quesillo: suave, cremoso y preparado con dedicación para tus momentos especiales.</p>
+                    <div class="hero-actions">
+                        <a href="#producto" class="btn btn-primary" id="btn-hacer-pedido">Hacer mi pedido</a>
+                        <p class="hero-note">Con domicilio o para recoger en Los Patios.</p>
+                    </div>
                 </div>
-                <div class="carousel-slide">
-                    <img src="img/producto-quesillos-empaques.jpg" alt="Ilustración de un domiciliario en moto llevando quesillos" class="hero-img-2" width="880" height="1195" loading="lazy">
+
+                <div class="hero-media">
+                    <div class="hero-carousel" id="hero-carousel">
+                        <div class="carousel-slide active">
+                            <img src="img/hero-1.jpg" alt="Quesillo casero con caramelo sobre una tabla de madera, con una cuchara al lado" class="hero-img-1" width="896" height="1195" fetchpriority="high">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="img/quesillos-empacados.jpg" alt="Quesillos en sus empaques, listos para entregar, con el letrero de Quesillos Emmanuel" class="hero-img-2" width="896" height="1195" loading="lazy">
+                        </div>
+                    </div>
                 </div>
-                <div class="carousel-slide">
-                    <img src="img/creadora-cocinanndo-quesillos.jpg" alt="Fundadora de Quesillos Emmanuel sonriendo en su cocina" class="hero-img-3" width="896" height="1195" loading="lazy">
-                </div>
-                <div class="carousel-slide">
-                    <img src="img/nosotros-cocina-ambiente.jpg" alt="Cocina donde se preparan los quesillos, con estufa y mesa con mantel de vacas" class="hero-img-4" width="896" height="1195" loading="lazy">
-                </div>
-            </div>
-            
-            <div class="hero-content">
-                <h1 class="hero-title">Tu antojo tiene nombre: quesillo.</h1>
-                <a href="#producto" class="btn btn-primary" id="btn-hacer-pedido">Hacer pedido</a>
             </div>
         </section>
 
         <!-- SECCIÓN 2: NOSOTROS -->
-        <section id="nosotros" class="nosotros container">
-            <div class="nosotros-image" style="background: none; box-shadow: none; overflow: visible;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; position: relative; z-index: 1;">
-                    <img src="img/creadora-cocinanndo-quesillos.jpg" alt="Fundadora de Quesillos Emmanuel sonriendo en su cocina" width="896" height="1195" loading="lazy" style="grid-column: 1 / -1; width: 100%; height: 350px; object-fit: cover; object-position: center 15%; border-radius: 20px; box-shadow: var(--shadow-lg);">
-                    <img src="img/nosotros-cocinando.jpg" alt="Quesillos tradicionales en sus empaques, listos para entregar" width="896" height="1195" loading="lazy" style="width: 100%; height: 280px; object-fit: cover; object-position: center 30%; border-radius: 20px; box-shadow: var(--shadow-md);">
-                    <img src="img/nosotros-cocina-ambiente.jpg" alt="Cocina donde se preparan los quesillos, con estufa y mesa con mantel de vacas" width="896" height="1195" loading="lazy" style="width: 100%; height: 280px; object-fit: cover; object-position: center 20%; border-radius: 20px; box-shadow: var(--shadow-md);">
+        <section id="nosotros" class="section nosotros">
+            <div class="container nosotros-grid">
+                <div class="nosotros-media" data-reveal>
+                    <img class="nosotros-foto-principal" src="img/fundadora-en-la-cocina.jpg" alt="La fundadora de Quesillos Emmanuel sonriendo en su cocina, junto a la estufa" width="896" height="1195" loading="lazy">
+                    <img class="nosotros-foto-secundaria" src="img/cocina.jpg" alt="La cocina donde se preparan los quesillos, con estufa y una mesa con mantel de vacas" width="896" height="1195" loading="lazy">
                 </div>
-            </div>
-            <div class="nosotros-content">
-                <h2>Nosotros</h2>
-                <p>En Quesillos Emmanuel nos apasiona crear deliciosos quesillos con un sabor casero, suave y cremoso. Cada uno de nuestros productos es preparado con dedicación y cuidado, utilizando ingredientes de calidad para ofrecer un postre delicioso en cada cucharada.</p>
-                <p>Buscamos conservar el sabor tradicional del quesillo y, al mismo tiempo, darle nuestro toque especial para convertir cada ocasión en un momento dulce e inolvidable.</p>
-                
-                <div class="nosotros-card">
-                    <h3>❤️ Nuestra misión</h3>
-                    <p>Endulzar tus momentos con quesillos preparados con calidad, dedicación y mucho sabor.</p>
-                </div>
-                
-                <div class="nosotros-card">
-                    <h3>✨ Nuestra visión</h3>
-                    <p>Ser una marca reconocida por ofrecer quesillos deliciosos, de calidad y preparados con el cariño que caracteriza a Quesillos Emmanuel.</p>
+
+                <div class="nosotros-content" data-reveal>
+                    <h2>Detrás de cada quesillo hay alguien que lo prepara con cariño</h2>
+                    <p>Nos gusta el sabor casero de siempre: un quesillo suave y cremoso, de los que se piden para compartir en la mesa. Cada uno se prepara con dedicación y cuidado, porque un buen postre se nota en los detalles.</p>
+                    <p>Conservamos el gusto tradicional y le sumamos nuestro toque especial para que cualquier ocasión, grande o pequeña, tenga un momento dulce.</p>
+
+                    <div class="valores">
+                        <div class="valor-card valor-card--mision">
+                            <h3>Nuestra misión</h3>
+                            <p>Endulzar tus momentos con quesillos preparados con calidad, dedicación y mucho sabor.</p>
+                        </div>
+                        <div class="valor-card valor-card--vision">
+                            <h3>Nuestra visión</h3>
+                            <p>Ser una marca reconocida por sus quesillos deliciosos y de calidad, preparados con el cariño de siempre.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- SECCIÓN 3: PRODUCTO -->
-        <section id="producto" class="producto container">
-            <div class="producto-image">
-                <img src="img/producto-quesillos-empaques.jpg" alt="Ilustración de un domiciliario en moto llevando quesillos" width="880" height="1195" loading="lazy">
-                <span class="badge">Muy saludable</span>
-            </div>
-            <div class="producto-details">
-                <h2>Quesillo Quesillos Emmanuel</h2>
-                <ul class="producto-specs">
-                    <li><strong>Peso:</strong> 1kg 200g</li>
-                    <li><strong>Porciones:</strong> Rinde 8 porciones</li>
-                    <li><strong>Precio:</strong> $28.000 COP</li>
-                </ul>
-                <button class="btn btn-primary" id="btn-add-cart">Añadir al carrito</button>
+        <section id="producto" class="section producto">
+            <div class="container producto-grid">
+                <div class="producto-image" data-reveal>
+                    <img src="img/hero-1.jpg" alt="Quesillo casero con caramelo sobre una tabla de madera, con una cuchara al lado" width="896" height="1195" loading="lazy">
+                </div>
+                <div class="producto-details" data-reveal>
+                    <h2>Quesillo Emmanuel</h2>
+                    <p class="producto-descripcion">De textura suave y cremosa, con su capa de caramelo por encima. Llega en su empaque, listo para servir y compartir con quienes más quieres.</p>
+
+                    <dl class="producto-specs">
+                        <div>
+                            <dt>Peso</dt>
+                            <dd>1 kg 200 g</dd>
+                        </div>
+                        <div>
+                            <dt>Rinde</dt>
+                            <dd>8 porciones</dd>
+                        </div>
+                    </dl>
+
+                    <p class="producto-precio"><span class="producto-precio__valor">$28.000</span> <span class="producto-precio__moneda">COP</span></p>
+                    <button class="btn btn-primary" id="btn-add-cart">Añadir al carrito</button>
+                    <p class="producto-nota">Confirmas tu pedido con un anticipo del 50 % por transferencia.</p>
+                </div>
             </div>
         </section>
-        
+
         <!-- Fase 2: Formulario de pedido -->
         <section id="seccion-pedido" class="seccion-pedido container hidden">
             <div class="pedido-container">
@@ -157,17 +171,17 @@
                         <label for="nombre">Nombre completo *</label>
                         <input type="text" id="nombre" name="nombre" required maxlength="80" autocomplete="name" placeholder="Ej. María Pérez">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="telefono">Teléfono (Celular 10 dígitos) *</label>
                         <input type="tel" id="telefono" name="telefono" required inputmode="numeric" maxlength="20" autocomplete="tel-national" placeholder="Ej. 3001234567">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="cantidad">Cantidad de quesillos *</label>
                         <input type="number" id="cantidad" name="cantidad" required min="1" max="20" step="1" inputmode="numeric" value="1">
                     </div>
-                    
+
                     <div class="form-group">
                         <label id="label-entrega">Tipo de entrega *</label>
                         <div class="radio-group" role="radiogroup" aria-labelledby="label-entrega">
@@ -181,7 +195,7 @@
                             </label>
                         </div>
                     </div>
-                    
+
                     <div id="campos-domicilio" class="campos-condicionales">
                         <div class="form-group">
                             <label>Ubicación para entrega *</label>
@@ -190,18 +204,18 @@
                             </button>
                             <p id="ubicacion-status" class="ubicacion-status" role="status"></p>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="direccionTexto">Referencia de dirección (Opcional)</label>
                             <input type="text" id="direccionTexto" name="direccionTexto" maxlength="150" autocomplete="street-address" placeholder="Apto, conjunto, esquina...">
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="metodo-pago">Método de pago</label>
                         <input type="text" id="metodo-pago" value="Transferencia" disabled class="input-disabled">
                     </div>
-                    
+
                     <div class="resumen-pedido">
                         <h3>Resumen</h3>
                         <div class="resumen-fila">
@@ -216,7 +230,7 @@
                             ⚠️ Se requiere un anticipo del 50% para confirmar el pedido. El anticipo no es reembolsable si el pedido se cancela.
                         </p>
                     </div>
-                    
+
                     <div id="form-error" class="form-error" role="alert" hidden>
                         <p class="form-error__texto"></p>
                         <a class="form-error__link" href="https://wa.me/573227068624" target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>
@@ -225,7 +239,7 @@
                     <button type="submit" id="btn-comprar" class="btn btn-primary btn-block">Comprar</button>
                 </form>
             </div>
-            
+
             <!-- Modal/Banner de Confirmación (Factura) -->
             <div id="modal-factura" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Factura del pedido">
                 <div class="factura-card">
@@ -247,62 +261,87 @@
                             <p class="destacado"><strong>Anticipo a transferir:</strong> <span id="fac-anticipo"></span></p>
                             <p><strong>Método de pago:</strong> Transferencia</p>
                         </div>
-                        <a id="btn-whatsapp" class="btn btn-primary btn-block" href="https://wa.me/573227068624" target="_blank" rel="noopener noreferrer" style="margin-top: 1.5rem;">Enviar comprobante por WhatsApp</a>
-                        <button id="btn-cerrar-factura" type="button" class="btn btn-secondary btn-block" style="margin-top: 1rem;">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SECCIÓN: DÓNDE ESTAMOS -->
-        <section id="ubicacion" class="ubicacion container">
-            <h2>¿Dónde estamos?</h2>
-            <div class="ubicacion-content">
-                <div class="ubicacion-info">
-                    <p><strong>Dirección:</strong></p>
-                    <p>Cl. 27b #10-30, Los Patios, Norte de Santander</p>
-                    
-                    <p><strong>Horario de atención (para recoger pedidos):</strong></p>
-                    <p>Lunes a viernes: 8:00 a.m. – 6:00 p.m.<br>
-                    Sábado y domingo: 8:00 a.m. – 12:00 p.m.</p>
-                    
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=Cl.+27b+%2310-30,+Los+Patios,+Norte+de+Santander,+Colombia" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-como-llegar">Cómo llegar</a>
-                    
-                    <div style="margin-top: 2.5rem; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-md);">
-                        <img src="img/delivery-domicilio.jpg" alt="Quesillos tradicionales en sus empaques, listos para entregar" width="896" height="1195" loading="lazy" style="width: 100%; height: 250px; object-fit: cover; object-position: center 20%;">
-                        <div style="background-color: var(--color-primary-light); padding: 0.8rem; text-align: center; font-weight: bold; color: var(--color-text); font-size: 1.05rem;">
-                            🛵 ¡También tenemos envíos a domicilio!
+                        <div class="factura-acciones">
+                            <a id="btn-whatsapp" class="btn btn-primary btn-block" href="https://wa.me/573227068624" target="_blank" rel="noopener noreferrer">Enviar comprobante por WhatsApp</a>
+                            <button id="btn-cerrar-factura" type="button" class="btn btn-secondary btn-block">Cerrar</button>
                         </div>
                     </div>
                 </div>
-                <div class="ubicacion-mapa">
-                    <iframe 
-                        title="Mapa de la ubicación de Quesillos Emmanuel en Los Patios"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15833.037593175825!2d-72.5057663!3d7.8016462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6645af5d0e28cf%3A0xc6a8274d7df67b4b!2sCl.%2027b%20%2310-30%2C%20Los%20Patios%2C%20Norte%20de%20Santander!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco" 
-                        width="100%" 
-                        height="350" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 4: DÓNDE ESTAMOS -->
+        <section id="ubicacion" class="section ubicacion">
+            <div class="container">
+                <div class="section-head" data-reveal>
+                    <h2>Dónde estamos</h2>
+                    <p class="section-lead">Pasa por tu pedido o pide que te lo llevemos: tú eliges cómo recibirlo.</p>
+                </div>
+
+                <div class="ubicacion-content" data-reveal>
+                    <div class="ubicacion-info">
+                        <div class="dato">
+                            <h3>Dirección</h3>
+                            <p>Cl. 27b #10-30, Los Patios, Norte de Santander</p>
+                        </div>
+
+                        <div class="dato">
+                            <h3>Horario para recoger tu pedido</h3>
+                            <dl class="horarios">
+                                <div><dt>Lunes a viernes</dt><dd>8:00 a.m. – 6:00 p.m.</dd></div>
+                                <div><dt>Sábados y domingos</dt><dd>8:00 a.m. – 12:00 p.m.</dd></div>
+                            </dl>
+                        </div>
+
+                        <div class="dato">
+                            <h3>Cómo recogerlo</h3>
+                            <p>Haz tu pedido en la página, transfiere el anticipo y pasa por él en el horario de atención.</p>
+                        </div>
+
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Cl.+27b+%2310-30,+Los+Patios,+Norte+de+Santander,+Colombia" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-como-llegar">Cómo llegar</a>
+                    </div>
+
+                    <div class="ubicacion-mapa">
+                        <iframe
+                            title="Mapa de la ubicación de Quesillos Emmanuel en Los Patios"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15833.037593175825!2d-72.5057663!3d7.8016462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6645af5d0e28cf%3A0xc6a8274d7df67b4b!2sCl.%2027b%20%2310-30%2C%20Los%20Patios%2C%20Norte%20de%20Santander!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco"
+                            width="100%"
+                            height="420"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+                <div class="domicilio" data-reveal>
+                    <img src="img/domicilio-moto.jpg" alt="Ilustración de un domiciliario en moto llevando los quesillos" width="880" height="1195" loading="lazy">
+                    <div class="domicilio-texto">
+                        <h3>También te lo llevamos</h3>
+                        <p>Elige domicilio al hacer tu pedido y comparte tu ubicación, así el quesillo llega hasta tu puerta.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 4: TESTIMONIOS -->
-        <section id="testimonios" class="testimonios">
+        <!-- SECCIÓN 5: TESTIMONIOS -->
+        <section id="testimonios" class="section testimonios">
             <div class="container">
-                <h2>Testimonios</h2>
-                <div class="testimonios-grid" id="testimonios-grid">
-                    <!-- Los testimonios se cargarán aquí dinámicamente desde Firestore -->
-                    <p style="text-align: center; grid-column: 1 / -1; color: #595959; font-style: italic;">Cargando testimonios...</p>
-                </div>
-                                <div class="testimonios-action">
+                <div class="section-head section-head--fila" data-reveal>
+                    <div>
+                        <h2>Lo que dicen quienes ya lo probaron</h2>
+                        <p class="section-lead">Cada opinión nos ayuda a mejorar. Si ya probaste nuestro quesillo, cuéntanos cómo te fue.</p>
+                    </div>
                     <button class="btn btn-secondary" id="btn-calificar">Calificar</button>
                 </div>
+
+                <div class="testimonios-grid" id="testimonios-grid" data-reveal>
+                    <!-- Los testimonios se cargarán aquí dinámicamente desde Firestore -->
+                    <p class="testimonio-empty">Cargando opiniones...</p>
+                </div>
             </div>
-            
+
             <!-- Modal para Formulario de Calificación -->
             <div id="modal-testimonio" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="titulo-testimonio">
                 <div class="factura-card">
@@ -311,7 +350,7 @@
                     </div>
                     <div class="factura-cuerpo">
                         <form id="form-testimonio" class="form-pedido">
-                            <div class="form-group" style="text-align: center; margin-bottom: 2rem;">
+                            <div class="form-group form-group--centrado">
                                 <label id="label-estrellas">¿Cuántas estrellas nos das? *</label>
                                 <div class="star-selector" id="star-selector" role="group" aria-labelledby="label-estrellas">
                                     <button type="button" class="star-icon" data-value="1" aria-label="1 estrella" aria-pressed="false">★</button>
@@ -322,23 +361,23 @@
                                 </div>
                                 <p id="star-error" class="ubicacion-status error hidden" role="alert">Por favor selecciona al menos 1 estrella</p>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="testimonio-nombre">Nombre (Opcional)</label>
                                 <input type="text" id="testimonio-nombre" maxlength="60" autocomplete="name" placeholder="Ej. Juan Pérez">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="testimonio-comentario">Comentario (Opcional)</label>
-                                <textarea id="testimonio-comentario" rows="3" maxlength="300" placeholder="¿Qué te pareció nuestro quesillo?" style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #ccc; border-radius: 8px; font-family: inherit; font-size: 1rem; resize: none; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);"></textarea>
-                                <div style="text-align: right; font-size: 0.8rem; color: #595959; margin-top: 0.2rem;">
+                                <textarea id="testimonio-comentario" rows="3" maxlength="300" placeholder="¿Qué te pareció nuestro quesillo?"></textarea>
+                                <div class="contador">
                                     <span id="char-count">300</span> caracteres restantes
                                 </div>
                             </div>
-                            
+
                             <p id="testimonio-error" class="field-error" role="alert" hidden></p>
                             <button type="submit" id="btn-enviar-testimonio" class="btn btn-primary btn-block">Enviar calificación</button>
-                            <button type="button" id="btn-cerrar-testimonio" class="btn btn-secondary btn-block" style="margin-top: 1rem; background-color: #e0e0e0; color: #333;">Cancelar</button>
+                            <button type="button" id="btn-cerrar-testimonio" class="btn btn-secondary btn-block btn-cancelar">Cancelar</button>
                         </form>
                     </div>
                 </div>
@@ -346,27 +385,28 @@
         </section>
     </main>
 
-    <!-- FOOTER -->
+    <!-- SECCIÓN 6: CONTACTO -->
     <footer id="contacto" class="footer">
-        <div class="container footer-content">
-            <div class="footer-brand">
-                <h2>Quesillos Emmanuel</h2>
-                <p>Tu antojo tiene nombre.</p>
+        <div class="container contacto">
+            <div class="contacto-cta">
+                <h2>¿Se te antojó?</h2>
+                <p>Escríbenos por WhatsApp y te ayudamos con tu pedido o con cualquier duda.</p>
+                <a class="btn btn-claro" href="https://wa.me/573227068624" target="_blank" rel="noopener noreferrer">Escribir por WhatsApp</a>
+                <p class="contacto-numero">+57 3227068624</p>
             </div>
-            <div class="footer-contact">
-                <h3>Contacto</h3>
-                <p>WhatsApp: <a href="https://wa.me/573227068624" target="_blank" rel="noopener noreferrer">+57 3227068624</a></p>
+
+            <div class="contacto-marca">
+                <p class="contacto-logo">Quesillos Emmanuel</p>
+                <p class="contacto-frase">Tu antojo tiene nombre: quesillo.</p>
+                <p class="contacto-direccion">Cl. 27b #10-30, Los Patios, Norte de Santander</p>
+                <!-- Redes sociales: ocultas hasta tener los enlaces reales de Facebook, Instagram y TikTok.
+                <ul class="redes">
+                    <li><a href="URL_FACEBOOK" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+                    <li><a href="URL_INSTAGRAM" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+                    <li><a href="URL_TIKTOK" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+                </ul>
+                -->
             </div>
-            <!-- Redes sociales: oculto hasta tener los enlaces reales (antes eran href="#", botones sin función).
-            <div class="footer-social">
-                <h3>Síguenos</h3>
-                <div class="social-icons">
-                    <a href="URL_FACEBOOK" aria-label="Facebook">FB</a>
-                    <a href="URL_INSTAGRAM" aria-label="Instagram">IG</a>
-                    <a href="URL_TIKTOK" aria-label="TikTok">TK</a>
-                </div>
-            </div>
-            -->
         </div>
         <div class="footer-bottom">
             <p>&copy; 2026 Quesillos Emmanuel. Todos los derechos reservados.</p>

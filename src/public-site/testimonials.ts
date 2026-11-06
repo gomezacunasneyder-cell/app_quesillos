@@ -22,7 +22,7 @@ async function cargarTestimonios(grid: HTMLElement): Promise<void> {
     const snapshot = await conTiempoLimite(getDocs(q), TIEMPO_MAX_GUARDADO_MS);
 
     if (snapshot.empty) {
-      grid.replaceChildren(crearMensajeTestimonios('testimonio-empty', 'Sé el primero en dejar tu opinión'));
+      grid.replaceChildren(crearMensajeTestimonios('testimonio-empty', 'Aún no hay opiniones. Sé la primera persona en contarnos cómo te fue.'));
       return;
     }
 
@@ -31,7 +31,7 @@ async function cargarTestimonios(grid: HTMLElement): Promise<void> {
     grid.replaceChildren(...snapshot.docs.map((doc) => crearTarjetaTestimonio(normalizarTestimonio(doc.data()))));
   } catch (error) {
     console.error('Error al cargar testimonios:', error);
-    grid.replaceChildren(crearMensajeTestimonios('testimonio-error', 'No se pudieron cargar los testimonios.'));
+    grid.replaceChildren(crearMensajeTestimonios('testimonio-error', 'No pudimos cargar las opiniones en este momento. Vuelve a intentarlo en unos minutos.'));
   }
 }
 

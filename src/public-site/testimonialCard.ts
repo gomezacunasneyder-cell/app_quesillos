@@ -42,7 +42,7 @@ export function crearTarjetaTestimonio(testimonio: TestimonioVisible): HTMLEleme
   estrellas.className = 'stars';
   estrellas.setAttribute('role', 'img');
   estrellas.setAttribute('aria-label', `${testimonio.estrellas} de 5 estrellas`);
-  estrellas.textContent = '⭐'.repeat(testimonio.estrellas) + '☆'.repeat(5 - testimonio.estrellas);
+  estrellas.textContent = '★'.repeat(testimonio.estrellas) + '☆'.repeat(5 - testimonio.estrellas);
   tarjeta.append(estrellas);
 
   if (testimonio.comentario) {
