@@ -1,0 +1,69 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Solo la cuenta del vendedor. Se identifica por UID (no se puede falsificar
+    // ni depende de verificar el correo). Reemplaza el texto por el UID real:
+    // Firebase Console > Authentication > Users > columna "User UID".
+    function esVendedor() {
+      return request.auth != null && request.auth.uid == 'PEGAR_UID_DEL_VENDEDOR';
+    }
+
+    // Un pedido nuevo solo puede crearse en estado "pendiente", con el total y
+    // el anticipo calculados con el precio real ($28.000 por quesillo).
+    // Si cambias el precio o el máximo en src/domain/precios.ts, cámbialo aquí.
+    function pedidoValido(d) {
+      return d.keys().hasOnly(['nombreCliente', 'telefono', 'cantidad', 'total', 'anticipo',
+                               'tipoEntrega', 'metodoPago', 'estado', 'fechaCreacion',
+                               'numeroFactura', 'ubicacion', 'direccionTexto'])
+          && d.keys().hasAll(['nombreCliente', 'telefono', 'cantidad', 'total', 'anticipo',
+                              'tipoEntrega', 'metodoPago', 'estado', 'fechaCreacion', 'numeroFactura'])
+          && d.nombreCliente is string && d.nombreCliente.size() >= 2 && d.nombreCliente.size() <= 80
+          && d.telefono is string && d.telefono.matches('^3[0-9]{9}$')
+          && d.cantidad is int && d.cantidad >= 1 && d.cantidad <= 20
+          && d.total is int && d.total == d.cantidad * 28000
+          && d.anticipo == d.total / 2
+          && d.tipoEntrega in ['domicilio', 'recoge']
+          && d.metodoPago == 'transferencia'
+          && d.estado == 'pendiente'
+          && d.fechaCreacion == request.time
+          && d.numeroFactura is string && d.numeroFactura.size() <= 40
+          && (!('direccionTexto' in d) || (d.direccionTexto is string && d.direccionTexto.size() <= 150))
+          && (!('ubicacion' in d) || (d.ubicacion is map
+                                      && d.ubicacion.keys().hasOnly(['lat', 'lng'])
+                                      && d.ubicacion.lat is number && d.ubicacion.lng is number));
+    }
+
+    function testimonioValido(d) {
+      return d.keys().hasOnly(['nombreCliente', 'estrellas', 'comentario', 'fecha'])
+          && d.keys().hasAll(['nombreCliente', 'estrellas', 'comentario', 'fecha'])
+          && d.nombreCliente is string && d.nombreCliente.size() <= 60
+          && d.estrellas is int && d.estrellas >= 1 && d.estrellas <= 5
+          && d.comentario is string && d.comentario.size() <= 300
+          && d.fecha == request.time;
+    }
+
+    match /pedidos/{pedidoId} {
+      // Cualquier visitante puede crear un pedido válido, pero NO leerlo.
+      allow create: if pedidoValido(request.resource.data);
+      allow read: if esVendedor();
+      // El vendedor solo puede cambiar el estado (y la fecha de entrega).
+      allow update: if esVendedor()
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['estado', 'fechaEntrega'])
+          && request.resource.data.estado in ['pendiente', 'en_preparacion', 'en_camino',
+                                              'listo_para_recoger', 'entregado', 'cancelado'];
+      allow delete: if false;
+    }
+
+    match /testimonios/{testimonioId} {
+      allow read: if true;
+      allow create: if testimonioValido(request.resource.data);
+      allow update, delete: if esVendedor();
+    }
+
+    // Cualquier otra colección: denegado.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

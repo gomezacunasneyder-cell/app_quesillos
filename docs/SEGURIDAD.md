@@ -38,6 +38,11 @@ en el servidor.
 
 ### 2.3 Reglas recomendadas (SIN PROBAR — pruébalas antes de publicar)
 
+> **Versión actualizada:** usa `docs/firestore.rules` (identifica al vendedor por
+> UID, limita las actualizaciones a `estado`/`fechaEntrega` y no permite borrar) y
+> pruébala con `rules-tests/` (emulador, ver su README). El bloque de abajo queda
+> como referencia anterior.
+
 > Estas reglas **no se han ejecutado** en ningún emulador ni en tu proyecto.
 > Cópialas en Firebase Console → Firestore → Reglas, y usa el **Simulador de
 > reglas** para comprobar: (a) crear un pedido válido como visitante, (b) crear
