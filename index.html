@@ -3,27 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quesillos Emmanuel - Tu antojo tiene nombre: quesillo</title>
-    <meta name="description" content="Quesillo casero de textura suave y cremosa, preparado en Los Patios, Norte de Santander. Pídelo a domicilio o recógelo en tienda.">
-    <meta name="theme-color" content="#F8F3EA">
+    <title>Alma de Caramelo | Quesillos artesanales — El sabor que te hace volver</title>
+    <meta name="description" content="Alma de Caramelo: quesillos artesanales de textura suave y cremosa, preparados en Los Patios, Norte de Santander. Pídelo a domicilio o recógelo en tienda.">
+    <meta name="theme-color" content="#FFF1DC">
     <link rel="canonical" href="__SITE_URL__/">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="preload" as="image" type="image/webp" href="img/hero-caramelo-768.webp" imagesrcset="img/hero-caramelo-768.webp 768w, img/hero-caramelo-1536.webp 1536w" imagesizes="(max-width: 800px) 100vw, 52vw" fetchpriority="high">
 
     <!-- Open Graph / Facebook / WhatsApp (las URLs absolutas las completa Vite con VITE_SITE_URL) -->
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Quesillos Emmanuel">
+    <meta property="og:site_name" content="Alma de Caramelo">
     <meta property="og:locale" content="es_CO">
     <meta property="og:url" content="__SITE_URL__/">
-    <meta property="og:title" content="Quesillos Emmanuel - Tu antojo tiene nombre: quesillo">
-    <meta property="og:description" content="Quesillo casero, suave y cremoso, para endulzar tus momentos especiales. Pídelo a domicilio o recógelo en tienda.">
+    <meta property="og:title" content="Alma de Caramelo | Quesillos artesanales">
+    <meta property="og:description" content="El sabor que te hace volver. Quesillos artesanales, suaves y cremosos. Pídelo a domicilio o recógelo en tienda.">
     <meta property="og:image" content="__SITE_URL__/img/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Quesillo casero de Quesillos Emmanuel">
+    <meta property="og:image:alt" content="Quesillo artesanal con caramelo de Alma de Caramelo">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Quesillos Emmanuel - Tu antojo tiene nombre: quesillo">
-    <meta name="twitter:description" content="Quesillo casero en Los Patios, Norte de Santander. Pídelo a domicilio o recógelo en tienda.">
+    <meta name="twitter:title" content="Alma de Caramelo | Quesillos artesanales">
+    <meta name="twitter:description" content="El sabor que te hace volver. Quesillos artesanales en Los Patios, Norte de Santander.">
     <meta name="twitter:image" content="__SITE_URL__/img/og-image.jpg">
 
     <!-- Datos estructurados para buscadores -->
@@ -31,8 +33,8 @@
     {
       "@context": "https://schema.org",
       "@type": "FoodEstablishment",
-      "name": "Quesillos Emmanuel",
-      "description": "Quesillo casero, suave y cremoso, en Los Patios, Norte de Santander.",
+      "name": "Alma de Caramelo",
+      "description": "Quesillos artesanales, suaves y cremosos, en Los Patios, Norte de Santander.",
       "url": "__SITE_URL__/",
       "image": "__SITE_URL__/img/og-image.jpg",
       "telephone": "+573227068624",
@@ -50,10 +52,10 @@
     }
     </script>
 
-    <!-- Tipografías: Playfair Display (títulos) y Nunito Sans (texto) -->
+    <!-- Tipografías: Playfair Display (títulos) y DM Sans (texto) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -62,7 +64,13 @@
     <a class="skip-link" href="#contenido-principal">Saltar al contenido</a>
     <header class="header">
         <div class="header-container">
-            <a href="#inicio" class="logo">Quesillos Emmanuel</a>
+            <a href="#inicio" class="logo" aria-label="Alma de Caramelo — Quesillos artesanales, ir al inicio">
+                <img class="logo__simbolo" src="img/logo-simbolo.svg" alt="" width="44" height="44">
+                <span class="logo__texto">
+                    <span class="logo__nombre">Alma de Caramelo</span>
+                    <span class="logo__sub">Quesillos artesanales</span>
+                </span>
+            </a>
             <button class="hamburger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-menu" id="hamburger-btn">
                 <span></span>
                 <span></span>
@@ -71,10 +79,10 @@
             <nav class="nav-menu" id="nav-menu" aria-label="Principal">
                 <ul class="nav-list">
                     <li><a href="#inicio" class="nav-link">Inicio</a></li>
-                    <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
-                    <li><a href="#producto" class="nav-link">Producto</a></li>
-                    <li><a href="#ubicacion" class="nav-link">Dónde estamos</a></li>
-                    <li><a href="#testimonios" class="nav-link">Testimonios</a></li>
+                    <li><a href="#nosotros" class="nav-link">Nuestra historia</a></li>
+                    <li><a href="#producto" class="nav-link">Quesillo</a></li>
+                    <li><a href="#ubicacion" class="nav-link">Pedidos y domicilios</a></li>
+                    <li><a href="#testimonios" class="nav-link">Opiniones</a></li>
                     <li><a href="#contacto" class="nav-link">Contacto</a></li>
                 </ul>
             </nav>
@@ -86,38 +94,42 @@
         <section id="inicio" class="hero">
             <div class="container hero-grid">
                 <div class="hero-content">
-                    <h1 class="hero-title">Hay antojos que merecen disfrutarse.</h1>
-                    <p class="hero-lead">Déjate conquistar por el sabor casero de nuestro quesillo: suave, cremoso y preparado con dedicación para tus momentos especiales.</p>
+                    <p class="eyebrow">Quesillos artesanales</p>
+                    <h1 class="hero-title">El sabor que te hace volver.</h1>
+                    <p class="hero-lead">Quesillo artesanal de textura suave y cremosa, con su capa de caramelo dorado. Preparado con dedicación para tus momentos especiales.</p>
                     <div class="hero-actions">
                         <a href="#producto" class="btn btn-primary" id="btn-hacer-pedido">Hacer mi pedido</a>
-                        <p class="hero-note">Con domicilio o para recoger en Los Patios.</p>
+                        <a href="#nosotros" class="btn btn-ghost">Conocer nuestra historia</a>
                     </div>
+                    <p class="hero-note">Con domicilio o para recoger en Los Patios.</p>
                 </div>
 
                 <div class="hero-media">
                     <div class="hero-carousel" id="hero-carousel">
                         <div class="carousel-slide active">
-                            <img src="img/hero-1.jpg" alt="Quesillo casero con caramelo sobre una tabla de madera, con una cuchara al lado" class="hero-img-1" width="896" height="1195" fetchpriority="high">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="img/quesillos-empacados.jpg" alt="Quesillos en sus empaques, listos para entregar, con el letrero de Quesillos Emmanuel" class="hero-img-2" width="896" height="1195" loading="lazy">
+                            <img src="img/hero-caramelo-1536.webp"
+                                 srcset="img/hero-caramelo-768.webp 768w, img/hero-caramelo-1536.webp 1536w"
+                                 sizes="(max-width: 800px) 100vw, 52vw"
+                                 alt="Quesillo artesanal con brillante caramelo dorado sobre un plato blanco con borde dorado"
+                                 class="hero-img-1" width="1536" height="1024" fetchpriority="high">
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN 2: NOSOTROS -->
+        <!-- SECCIÓN 2: NUESTRA HISTORIA -->
         <section id="nosotros" class="section nosotros">
             <div class="container nosotros-grid">
                 <div class="nosotros-media" data-reveal>
-                    <img class="nosotros-foto-principal" src="img/fundadora-en-la-cocina.jpg" alt="La fundadora de Quesillos Emmanuel sonriendo en su cocina, junto a la estufa" width="896" height="1195" loading="lazy">
-                    <img class="nosotros-foto-secundaria" src="img/cocina.jpg" alt="La cocina donde se preparan los quesillos, con estufa y una mesa con mantel de vacas" width="896" height="1195" loading="lazy">
+                    <img class="nosotros-foto-principal" src="img/fundadora-cocina.webp" alt="La fundadora de Alma de Caramelo sonriendo en su cocina, junto a la estufa" width="896" height="1195" loading="lazy" decoding="async">
+                    <img class="nosotros-foto-secundaria" src="img/cocina.webp" alt="La cocina donde se preparan los quesillos, con estufa y una mesa con mantel de vacas" width="896" height="1195" loading="lazy" decoding="async">
                 </div>
 
                 <div class="nosotros-content" data-reveal>
+                    <p class="eyebrow">Nuestra historia</p>
                     <h2>Detrás de cada quesillo hay alguien que lo prepara con cariño</h2>
-                    <p>Nos gusta el sabor casero de siempre: un quesillo suave y cremoso, de los que se piden para compartir en la mesa. Cada uno se prepara con dedicación y cuidado, porque un buen postre se nota en los detalles.</p>
+                    <p>Nos gusta el sabor de siempre: un quesillo suave y cremoso, de los que se piden para compartir en la mesa. Cada uno se prepara en nuestra cocina con dedicación y cuidado, porque un buen postre se nota en los detalles.</p>
                     <p>Conservamos el gusto tradicional y le sumamos nuestro toque especial para que cualquier ocasión, grande o pequeña, tenga un momento dulce.</p>
 
                     <div class="valores">
@@ -136,28 +148,53 @@
 
         <!-- SECCIÓN 3: PRODUCTO -->
         <section id="producto" class="section producto">
-            <div class="container producto-grid">
-                <div class="producto-image" data-reveal>
-                    <img src="img/hero-1.jpg" alt="Quesillo casero con caramelo sobre una tabla de madera, con una cuchara al lado" width="896" height="1195" loading="lazy">
+            <div class="container">
+                <div class="producto-grid">
+                    <div class="producto-image" data-reveal>
+                        <img src="img/producto-corte-1536.webp"
+                             srcset="img/producto-corte-768.webp 768w, img/producto-corte-1536.webp 1536w"
+                             sizes="(max-width: 800px) 100vw, 52vw"
+                             alt="Quesillo artesanal con una porción cortada que deja ver su interior cremoso, sobre un plato con caramelo"
+                             width="1536" height="1024" loading="lazy" decoding="async">
+                    </div>
+                    <div class="producto-details" data-reveal>
+                        <p class="eyebrow">Nuestro quesillo</p>
+                        <h2>Quesillo artesanal</h2>
+                        <p class="producto-descripcion">De textura suave y cremosa, con su capa de caramelo por encima. Llega en su empaque, listo para servir y compartir con quienes más quieres.</p>
+
+                        <dl class="producto-specs">
+                            <div>
+                                <dt>Peso</dt>
+                                <dd>1 kg 200 g</dd>
+                            </div>
+                            <div>
+                                <dt>Rinde</dt>
+                                <dd>8 porciones</dd>
+                            </div>
+                        </dl>
+
+                        <p class="producto-precio"><span class="producto-precio__valor">$28.000</span> <span class="producto-precio__moneda">COP</span></p>
+                        <button class="btn btn-primary btn-comprar-grande" id="btn-add-cart">Añadir al carrito</button>
+                        <p class="producto-nota">Confirmas tu pedido con un anticipo del 50 % por transferencia.</p>
+                    </div>
                 </div>
-                <div class="producto-details" data-reveal>
-                    <h2>Quesillo Emmanuel</h2>
-                    <p class="producto-descripcion">De textura suave y cremosa, con su capa de caramelo por encima. Llega en su empaque, listo para servir y compartir con quienes más quieres.</p>
 
-                    <dl class="producto-specs">
-                        <div>
-                            <dt>Peso</dt>
-                            <dd>1 kg 200 g</dd>
-                        </div>
-                        <div>
-                            <dt>Rinde</dt>
-                            <dd>8 porciones</dd>
-                        </div>
-                    </dl>
-
-                    <p class="producto-precio"><span class="producto-precio__valor">$28.000</span> <span class="producto-precio__moneda">COP</span></p>
-                    <button class="btn btn-primary" id="btn-add-cart">Añadir al carrito</button>
-                    <p class="producto-nota">Confirmas tu pedido con un anticipo del 50 % por transferencia.</p>
+                <!-- Sugerencias de presentación (fotografías de ambientación; no son productos adicionales) -->
+                <div class="galeria" data-reveal>
+                    <figure class="galeria__item">
+                        <img src="img/galeria-frutos-768.webp"
+                             srcset="img/galeria-frutos-768.webp 768w, img/galeria-frutos-1536.webp 1536w"
+                             sizes="(max-width: 800px) 100vw, 50vw"
+                             alt="Quesillo con caramelo servido con frutos rojos y hojas de menta" width="1536" height="1024" loading="lazy" decoding="async">
+                        <figcaption>Con frutas frescas y menta</figcaption>
+                    </figure>
+                    <figure class="galeria__item">
+                        <img src="img/galeria-cafe-768.webp"
+                             srcset="img/galeria-cafe-768.webp 768w, img/galeria-cafe-1536.webp 1536w"
+                             sizes="(max-width: 800px) 100vw, 50vw"
+                             alt="Quesillo con caramelo servido junto a una taza de café humeante" width="1536" height="1024" loading="lazy" decoding="async">
+                        <figcaption>Para acompañar con un buen café</figcaption>
+                    </figure>
                 </div>
             </div>
         </section>
@@ -274,8 +311,9 @@
         <section id="ubicacion" class="section ubicacion">
             <div class="container">
                 <div class="section-head" data-reveal>
-                    <h2>Dónde estamos</h2>
-                    <p class="section-lead">Pasa por tu pedido o pide que te lo llevemos: tú eliges cómo recibirlo.</p>
+                    <p class="eyebrow">Pedidos y domicilios</p>
+                    <h2>Pasa por él o te lo llevamos</h2>
+                    <p class="section-lead">Tú eliges cómo recibirlo: recógelo en tienda o pide domicilio.</p>
                 </div>
 
                 <div class="ubicacion-content" data-reveal>
@@ -303,7 +341,7 @@
 
                     <div class="ubicacion-mapa">
                         <iframe
-                            title="Mapa de la ubicación de Quesillos Emmanuel en Los Patios"
+                            title="Mapa de la ubicación de Alma de Caramelo en Los Patios"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15833.037593175825!2d-72.5057663!3d7.8016462!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6645af5d0e28cf%3A0xc6a8274d7df67b4b!2sCl.%2027b%20%2310-30%2C%20Los%20Patios%2C%20Norte%20de%20Santander!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco"
                             width="100%"
                             height="420"
@@ -316,10 +354,14 @@
                 </div>
 
                 <div class="domicilio" data-reveal>
-                    <img src="img/domicilio-moto.jpg" alt="Ilustración de un domiciliario en moto llevando los quesillos" width="880" height="1195" loading="lazy">
+                    <img src="img/pedido-empaques-768.webp"
+                         srcset="img/pedido-empaques-768.webp 768w, img/pedido-empaques-1536.webp 1536w"
+                         sizes="(max-width: 768px) 100vw, 45vw"
+                         alt="Quesillos empacados con tapa transparente, listos para entregar" width="1536" height="1024" loading="lazy" decoding="async">
                     <div class="domicilio-texto">
                         <h3>También te lo llevamos</h3>
                         <p>Elige domicilio al hacer tu pedido y comparte tu ubicación, así el quesillo llega hasta tu puerta.</p>
+                        <a href="#producto" class="btn btn-primary">Hacer mi pedido</a>
                     </div>
                 </div>
             </div>
@@ -330,6 +372,7 @@
             <div class="container">
                 <div class="section-head section-head--fila" data-reveal>
                     <div>
+                        <p class="eyebrow">Opiniones</p>
                         <h2>Lo que dicen quienes ya lo probaron</h2>
                         <p class="section-lead">Cada opinión nos ayuda a mejorar. Si ya probaste nuestro quesillo, cuéntanos cómo te fue.</p>
                     </div>
@@ -396,8 +439,9 @@
             </div>
 
             <div class="contacto-marca">
-                <p class="contacto-logo">Quesillos Emmanuel</p>
-                <p class="contacto-frase">Tu antojo tiene nombre: quesillo.</p>
+                <p class="contacto-logo"><img src="img/logo-simbolo.svg" alt="" width="52" height="52" loading="lazy"> <span>Alma de Caramelo</span></p>
+                <p class="contacto-sub">Quesillos artesanales</p>
+                <p class="contacto-frase">El sabor que te hace volver.</p>
                 <p class="contacto-direccion">Cl. 27b #10-30, Los Patios, Norte de Santander</p>
                 <!-- Redes sociales: ocultas hasta tener los enlaces reales de Facebook, Instagram y TikTok.
                 <ul class="redes">
@@ -409,7 +453,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Quesillos Emmanuel. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Alma de Caramelo. Todos los derechos reservados.</p>
         </div>
     </footer>
 

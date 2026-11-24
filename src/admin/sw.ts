@@ -20,7 +20,11 @@ declare const __SW_VERSION__: string;
 const PREFIJO_CACHE = 'quesillos-admin-';
 const CACHE_ACTUAL = `${PREFIJO_CACHE}${__SW_VERSION__}`;
 const URL_SIN_CONEXION = new URL('./offline.html', self.location.href).href;
-const PRECARGA = [URL_SIN_CONEXION, new URL('./css/admin.css', self.location.href).href];
+const PRECARGA = [
+  URL_SIN_CONEXION,
+  new URL('./css/admin.css', self.location.href).href,
+  new URL('./icons/icon-192.png', self.location.href).href,
+];
 /** Con copia guardada, no esperamos más que esto a una red lenta. */
 const ESPERA_MAX_RED_MS = 4000;
 

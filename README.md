@@ -1,4 +1,4 @@
-# Quesillos Emmanuel — Página web + sistema de pedidos
+# Alma de Caramelo — Página web + sistema de pedidos
 
 Documento guía de arquitectura para desarrollo con **Antigravity**. Este README define el alcance, la estructura, el modelo de datos y el orden de implementación por fases. Cada fase debe completarse y probarse antes de pasar a la siguiente.
 
@@ -13,7 +13,7 @@ Página web con dos partes:
 
 **Regla de negocio central**: los quesillos se venden **sobre pedido**, con un anticipo del **50%** pagado por transferencia. No hay pago en efectivo ni compra inmediata de stock.
 
-**Producto**: Quesillo Quesillos Emmanuel — 1kg 200g, 8 porciones, $28.000 COP.
+**Producto**: Quesillo artesanal — 1kg 200g, 8 porciones, $28.000 COP.
 
 ---
 
@@ -30,21 +30,24 @@ Página web con dos partes:
 
 ## 3. Identidad visual
 
-**Nombre de marca**: Quesillos Emmanuel
+**Nombre de marca**: Alma de Caramelo · *Quesillos artesanales* · «El sabor que te hace volver»
 
-**Paleta "Crema & Terracota" (landing pública, rediseño de noviembre 2026)**
+**Paleta (rediseño de identidad, noviembre 2026)**
 
 | Rol | Color | Hex |
 |---|---|---|
-| Fondo principal | Crema | `#F8F3EA` |
-| Acento decorativo (formas, líneas) | Terracota | `#D98C62` |
-| Acento decorativo (estrellas) / precio (oscuro) | Caramelo | `#B87543` / `#8A5226` |
-| Textos, botones y footer | Chocolate | `#493126` |
-| Detalles (tarjeta de visión) | Verde suave | `#74836B` (tinte `#E4E9DE`) |
+| Fondo base | Marfil | `#FAF7F2` |
+| Secciones alternas y tarjetas | Crema | `#FFF1DC` |
+| Textos, footer y fondo del símbolo | Cacao | `#492B20` |
+| Acento decorativo (formas, líneas, estrellas) | Caramelo | `#AD713B` |
+| Acento decorativo / texto sobre cacao | Dorado | `#DDA65D` |
+| Botones, enlaces y precio (texto accesible) | Caramelo oscuro | `#8A5527` |
 
-Terracota y caramelo no alcanzan contraste 4.5:1 sobre crema: solo se usan como decoración; el texto va en chocolate o en las variantes oscuras. El panel admin conserva su propia paleta.
+Caramelo y dorado no alcanzan contraste 4.5:1 sobre crema/marfil: ahí solo son decoración; el texto va en cacao o caramelo oscuro (≥ 5,5:1). El dorado sí contrasta sobre cacao (5,9:1). El panel admin usa la misma paleta.
 
-**Tipografía y tono**: Playfair Display (títulos) + Nunito Sans (texto); sentence case, cálido, cercano, sabor tradicional/casero.
+**Tipografía y tono**: Playfair Display (títulos) + DM Sans (texto); sentence case, cálido, cercano, sabor artesanal.
+
+**Imágenes**: WebP en dos tamaños (768 y 1536 px, `srcset`), proporción original 3:2 sin recortes (`object-fit` con el mismo aspect-ratio), las secundarias con `loading="lazy"`. El símbolo (`public/img/logo-simbolo.svg`, `public/favicon.svg` y los íconos de la PWA) es **provisional**: se reemplaza por el logo definitivo cuando esté disponible.
 
 ---
 
@@ -60,7 +63,7 @@ Diseño **mobile-first**, con **menú hamburguesa** para navegación (anclas: In
 ### 4.2 Nosotros
 - Fotos del proceso/marca
 - Texto:
-  - 🍮 Nosotros — historia de Quesillos Emmanuel
+  - 🍮 Nosotros — Nuestra historia de Alma de Caramelo
   - ❤️ Nuestra misión
   - ✨ Nuestra visión
 
@@ -202,4 +205,4 @@ Cada fase se implementa, se prueba y se confirma con Steven antes de avanzar a l
 ## 9. Contacto de negocio
 
 - WhatsApp para pedidos y confirmación: **+57 3227068624**
-- Marca: Quesillos Emmanuel
+- Marca: Alma de Caramelo

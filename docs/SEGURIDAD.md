@@ -1,4 +1,4 @@
-# Seguridad y puesta en producción — Quesillos Emmanuel
+# Seguridad y puesta en producción — Alma de Caramelo
 
 Este documento resume qué se protegió en el código (Fase 9) y qué **no se puede
 resolver desde el código** y requiere cambios en la consola de Firebase o en el

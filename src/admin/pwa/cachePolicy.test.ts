@@ -59,7 +59,7 @@ describe('decidirEstrategia', () => {
 
   it('ignora URLs inválidas y archivos propios que no son del cascarón', () => {
     expect(decidirEstrategia(peticion('no-es-una-url'), ORIGEN)).toBe('ignorar');
-    expect(decidirEstrategia(peticion(`${ORIGEN}/img/hero-1.jpg`), ORIGEN)).toBe('ignorar');
+    expect(decidirEstrategia(peticion(`${ORIGEN}/img/hero-caramelo-1536.webp`), ORIGEN)).toBe('ignorar');
   });
 });
 

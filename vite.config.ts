@@ -1,5 +1,5 @@
 import { loadEnv, type Plugin } from 'vite';
-import { defineConfig } from 'vitest/config';
+import { configDefaults, defineConfig } from 'vitest/config';
 import { resolve } from 'path';
 
 // Sitio multi-página: landing pública + panel administrativo.
@@ -73,6 +73,11 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 3000,
       open: true,
+    },
+    test: {
+      // Las pruebas de reglas de Firestore (rules-tests/) tienen su propio
+      // package.json y necesitan el emulador: se ejecutan con `cd rules-tests && npm test`.
+      exclude: [...configDefaults.exclude, 'rules-tests/**'],
     },
   };
 });

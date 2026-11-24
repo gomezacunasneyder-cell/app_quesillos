@@ -7,7 +7,7 @@ const SLIDE_INTERVAL_MS = 5000;
  */
 export function initCarousel(): void {
   const slides = document.querySelectorAll<HTMLElement>('.carousel-slide');
-  if (slides.length === 0) return;
+  if (slides.length < 2) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   let currentSlide = 0;

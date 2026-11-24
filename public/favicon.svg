@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Alma de Caramelo">
+  <rect width="512" height="512" rx="112" fill="#492B20"/>
+  <g transform="translate(256 262) scale(0.92) translate(-256 -262)">
+    <ellipse cx="256" cy="360" rx="176" ry="32" fill="#DDA65D"/>
+    <ellipse cx="256" cy="354" rx="150" ry="22" fill="#FFF1DC" opacity=".35"/>
+    <path d="M156 262 L170 344 Q256 368 342 344 L356 262 Z" fill="#FFF1DC"/>
+    <path d="M148 262C148 214 200 194 256 194S364 214 364 262C364 262 352 272 342 264L342 294Q342 306 330 306 318 306 318 294L318 270C300 278 284 272 272 266L272 282Q272 296 260 296 248 296 248 282L248 268C228 274 212 274 198 268L198 298Q198 310 186 310 174 310 174 298L174 268C160 272 152 270 148 262Z" fill="#AD713B"/>
+    <ellipse cx="226" cy="226" rx="34" ry="9" fill="#DDA65D" opacity=".85" transform="rotate(-8 226 226)"/>
+    <path d="M388 150l7 18 18 7-18 7-7 18-7-18-18-7 18-7z" fill="#DDA65D"/>
+  </g>
+</svg>
