@@ -575,9 +575,9 @@ h3 {
 /* Sugerencias de presentación */
 .galeria {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-top: 4.5rem;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 720px;
+  margin: 4.5rem auto 0;
 }
 
 .galeria__item {
@@ -1353,8 +1353,6 @@ main:focus {
   }
 
   .galeria {
-    grid-template-columns: 1fr;
-    gap: 2rem;
     margin-top: 3.5rem;
   }
 
