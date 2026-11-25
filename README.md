@@ -13,7 +13,7 @@ Página web con dos partes:
 
 **Regla de negocio central**: los quesillos se venden **sobre pedido**, con un anticipo del **50%** pagado por transferencia. No hay pago en efectivo ni compra inmediata de stock.
 
-**Producto**: Quesillo artesanal — 1kg 200g, 8 porciones, $28.000 COP.
+**Producto**: Quesillo artesanal — 1kg 200g, 8 porciones, $30.000 COP.
 
 ---
 
@@ -69,7 +69,7 @@ Diseño **mobile-first**, con **menú hamburguesa** para navegación (anclas: In
 
 ### 4.3 Producto
 - Fotos del quesillo
-- Ficha: 1kg 200g, 8 porciones, saludable, $28.000
+- Ficha: 1kg 200g, 8 porciones, saludable, $30.000
 - Botón **"Añadir al carrito"** → despliega formulario de pedido
 
 ### 4.4 Formulario de pedido (carrito)

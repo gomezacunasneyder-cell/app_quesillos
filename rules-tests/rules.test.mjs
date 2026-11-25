@@ -21,8 +21,8 @@ const pedidoValido = (extra = {}) => ({
   nombreCliente: 'María Pérez',
   telefono: '3001234567',
   cantidad: 2,
-  total: 56000,
-  anticipo: 28000,
+  total: 60000,
+  anticipo: 30000,
   tipoEntrega: 'domicilio',
   metodoPago: 'transferencia',
   estado: 'pendiente',
@@ -87,7 +87,7 @@ describe('pedidos: crear', () => {
 
   it('rechaza cantidad negativa, cero o mayor a 20', async () => {
     for (const cantidad of [-5, 0, 21]) {
-      await assertFails(addDoc(collection(visitante(), 'pedidos'), pedidoValido({ cantidad, total: cantidad * 28000, anticipo: (cantidad * 28000) / 2 })));
+      await assertFails(addDoc(collection(visitante(), 'pedidos'), pedidoValido({ cantidad, total: cantidad * 30000, anticipo: (cantidad * 30000) / 2 })));
     }
   });
 

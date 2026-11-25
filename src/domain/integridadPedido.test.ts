@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { detectarInconsistencias } from './integridadPedido';
-import { MAX_CANTIDAD, PRECIO_QUESILLO } from './precios';
+import { MAX_CANTIDAD, PRECIO_QUESILLO, PRECIOS_ANTERIORES } from './precios';
 
 const ok = (cantidad: number) => ({ cantidad, total: cantidad * PRECIO_QUESILLO, anticipo: (cantidad * PRECIO_QUESILLO) / 2 });
 
@@ -11,6 +11,12 @@ describe('detectarInconsistencias', () => {
     }
   });
 
+  it('no marca como inconsistentes los pedidos hechos con un precio anterior', () => {
+    const anterior = 28000;
+    expect(PRECIOS_ANTERIORES).toContain(anterior);
+    expect(detectarInconsistencias({ cantidad: 2, total: 2 * anterior, anticipo: anterior })).toEqual([]);
+  });
+
   it('detecta un total manipulado (ej. 5 quesillos por $1.000)', () => {
     const avisos = detectarInconsistencias({ cantidad: 5, total: 1000, anticipo: 500 });
     expect(avisos).toHaveLength(1);
@@ -19,7 +25,7 @@ describe('detectarInconsistencias', () => {
 
   it('detecta cantidades imposibles', () => {
     for (const cantidad of [0, -3, 1.5, MAX_CANTIDAD + 1, NaN]) {
-      expect(detectarInconsistencias({ cantidad, total: 28000, anticipo: 14000 }).join(' '), `cantidad ${cantidad}`).toMatch(/cantidad/);
+      expect(detectarInconsistencias({ cantidad, total: 30000, anticipo: 15000 }).join(' '), `cantidad ${cantidad}`).toMatch(/cantidad/);
     }
   });
 

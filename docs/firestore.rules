@@ -10,7 +10,7 @@ service cloud.firestore {
     }
 
     // Un pedido nuevo solo puede crearse en estado "pendiente", con el total y
-    // el anticipo calculados con el precio real ($28.000 por quesillo).
+    // el anticipo calculados con el precio real ($30.000 por quesillo).
     // Si cambias el precio o el máximo en src/domain/precios.ts, cámbialo aquí.
     function pedidoValido(d) {
       return d.keys().hasOnly(['nombreCliente', 'telefono', 'cantidad', 'total', 'anticipo',
@@ -21,7 +21,7 @@ service cloud.firestore {
           && d.nombreCliente is string && d.nombreCliente.size() >= 2 && d.nombreCliente.size() <= 80
           && d.telefono is string && d.telefono.matches('^3[0-9]{9}$')
           && d.cantidad is int && d.cantidad >= 1 && d.cantidad <= 20
-          && d.total is int && d.total == d.cantidad * 28000
+          && d.total is int && d.total == d.cantidad * 30000
           && d.anticipo == d.total / 2
           && d.tipoEntrega in ['domicilio', 'recoge']
           && d.metodoPago == 'transferencia'

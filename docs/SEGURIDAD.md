@@ -68,7 +68,7 @@ service cloud.firestore {
           && d.nombreCliente is string && d.nombreCliente.size() >= 2 && d.nombreCliente.size() <= 80
           && d.telefono is string && d.telefono.matches('^3[0-9]{9}$')
           && d.cantidad is int && d.cantidad >= 1 && d.cantidad <= 20
-          && d.total == d.cantidad * 28000          // precio por quesillo
+          && d.total == d.cantidad * 30000          // precio por quesillo
           && d.anticipo == d.total / 2
           && d.tipoEntrega in ['domicilio', 'recoge']
           && d.metodoPago == 'transferencia'
@@ -104,7 +104,7 @@ service cloud.firestore {
 ```
 
 Notas:
-- Si cambias el precio en `src/domain/precios.ts`, cambia también `28000` aquí
+- Si cambias el precio en `src/domain/precios.ts`, cambia también `30000` aquí
   (y el máximo de 20). Son dos lugares que deben coincidir.
 - `email_verified == true` exige que verifiques el correo del vendedor en
   Firebase Auth; si no lo has hecho, quita esa línea o verifícalo primero, de lo

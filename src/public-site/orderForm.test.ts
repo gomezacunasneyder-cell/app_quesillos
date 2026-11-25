@@ -32,7 +32,7 @@ const enviar = (): void => {
   $<HTMLFormElement>('form-pedido').dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
 };
 
-const pedidoCreado = (extra = {}) => ({ id: 'abc', numeroFactura: 'FAC-123', anticipo: 28000, ...extra });
+const pedidoCreado = (extra = {}) => ({ id: 'abc', numeroFactura: 'FAC-123', anticipo: 30000, ...extra });
 
 beforeEach(() => {
   document.body.innerHTML = cuerpo;
@@ -61,7 +61,7 @@ describe('formulario de pedido', () => {
       nombreCliente: 'María Pérez',
       telefono: '3001234567',
       cantidad: 2,
-      total: 56000,
+      total: 60000,
       tipoEntrega: 'domicilio',
       ubicacion: undefined,
       direccionTexto: 'Apto 301',
@@ -69,8 +69,8 @@ describe('formulario de pedido', () => {
 
     expect($('fac-numero').textContent).toBe('FAC-123');
     expect($('fac-cliente').textContent).toBe('María Pérez');
-    expect($('fac-total').textContent).toContain('56.000');
-    expect($('fac-anticipo').textContent).toContain('28.000');
+    expect($('fac-total').textContent).toContain('60.000');
+    expect($('fac-anticipo').textContent).toContain('30.000');
 
     const enlace = $<HTMLAnchorElement>('btn-whatsapp').href;
     expect(enlace.startsWith('https://wa.me/573227068624?text=')).toBe(true);

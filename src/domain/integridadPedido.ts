@@ -1,5 +1,5 @@
 import type { Pedido } from '../types/pedido';
-import { calcularTotal, MAX_CANTIDAD } from './precios';
+import { calcularTotal, MAX_CANTIDAD, PRECIOS_ANTERIORES } from './precios';
 
 /**
  * Revisa que un pedido leído de Firestore sea coherente.
@@ -18,7 +18,7 @@ export function detectarInconsistencias(pedido: Pick<Pedido, 'cantidad' | 'total
 
   if (!Number.isInteger(cantidad) || cantidad < 1 || cantidad > MAX_CANTIDAD) {
     avisos.push('La cantidad está fuera de lo normal.');
-  } else if (total !== calcularTotal(cantidad)) {
+  } else if (total !== calcularTotal(cantidad) && !PRECIOS_ANTERIORES.some((precio) => total === cantidad * precio)) {
     avisos.push('El total no coincide con la cantidad y el precio actual.');
   }
 
